@@ -45,6 +45,7 @@ import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.LocalCacheScope;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.type.JdbcType;
+import org.w3c.dom.Document;
 
 /**
  * @author Clinton Begin
@@ -78,15 +79,21 @@ public class XMLConfigBuilder extends BaseBuilder {
   }
 
   public XMLConfigBuilder(InputStream inputStream, String environment, Properties props) {
+	  //XPathParser 中的 Document document字段存储了xml的所有数据
     this(new XPathParser(inputStream, true, props, new XMLMapperEntityResolver()), environment, props);
   }
-
+  /*
+   * 拿到XPathParser 这个对象，对这个类种的字段进行赋值操作
+   * 
+   */
   private XMLConfigBuilder(XPathParser parser, String environment, Properties props) {
     super(new Configuration());
     ErrorContext.instance().resource("SQL Mapper Configuration");
     this.configuration.setVariables(props);
     this.parsed = false;
     this.environment = environment;
+    //将XPathParser 对象赋值给了本类的XPathParser 字段，存储XPathParser 解析的数据，也就是
+    //存储了Document 字段，也就是存储了xml中的数据；
     this.parser = parser;
   }
 
@@ -95,6 +102,7 @@ public class XMLConfigBuilder extends BaseBuilder {
       throw new BuilderException("Each XMLConfigBuilder can only be used once.");
     }
     parsed = true;
+    //从之前存储在XPathParser对象中拿到 Configuration 对象，
     parseConfiguration(parser.evalNode("/configuration"));
     return configuration;
   }

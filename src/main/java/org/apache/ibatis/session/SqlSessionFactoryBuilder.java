@@ -59,7 +59,10 @@ public class SqlSessionFactoryBuilder {
       }
     }
   }
-
+/*
+ * 
+ * 建造者模式，通过 SqlSessionFactoryBuilder构造对象去创建 SqlSessionFactory对象
+ */
   public SqlSessionFactory build(InputStream inputStream) {
     return build(inputStream, null, null);
   }
@@ -71,10 +74,18 @@ public class SqlSessionFactoryBuilder {
   public SqlSessionFactory build(InputStream inputStream, Properties properties) {
     return build(inputStream, null, properties);
   }
-
+/**
+ *  重载方法，但是当前被调用的时候是没有environment字段和 properties字段
+ * @param inputStream
+ * @param environment
+ * @param properties
+ * @return
+ */
   public SqlSessionFactory build(InputStream inputStream, String environment, Properties properties) {
     try {
+    	 //根据输入流对象去创建
       XMLConfigBuilder parser = new XMLConfigBuilder(inputStream, environment, properties);
+      //通过 Configuration 对象 解析获取  SqlSessionFactory sql回话工厂类；
       return build(parser.parse());
     } catch (Exception e) {
       throw ExceptionFactory.wrapException("Error building SqlSession.", e);

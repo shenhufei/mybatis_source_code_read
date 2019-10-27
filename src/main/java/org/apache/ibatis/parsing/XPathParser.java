@@ -120,9 +120,19 @@ public class XPathParser {
     commonConstructor(validation, variables, entityResolver);
     this.document = createDocument(new InputSource(reader));
   }
-
+ /*
+  * EntityResolver dtd文件（约束）文件的管理路径
+  *  validation  判断是否需要进行约束校验
+  */
   public XPathParser(InputStream inputStream, boolean validation, Properties variables, EntityResolver entityResolver) {
-    commonConstructor(validation, variables, entityResolver);
+    //初始化本类的 
+	//private boolean validation;
+	// private EntityResolver entityResolver;
+	// private Properties variables;
+	//private XPath xpath; 这个几个字段 
+	commonConstructor(validation, variables, entityResolver);
+	//new InputSource(inputStream) 代码将输入流类型变成字节流类型
+	//重点是createDocument 该方法拿到 Document 给本类赋值Document字段赋值
     this.document = createDocument(new InputSource(inputStream));
   }
 
@@ -229,6 +239,7 @@ public class XPathParser {
   private Document createDocument(InputSource inputSource) {
     // important: this must only be called AFTER common constructor
     try {
+    	//jdk中的建造者模式，通过DocumentBuilderFactory对象创建DocumentBuilder 对象
       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
       factory.setValidating(validation);
 
@@ -237,9 +248,10 @@ public class XPathParser {
       factory.setIgnoringElementContentWhitespace(false);
       factory.setCoalescing(false);
       factory.setExpandEntityReferences(true);
-
+      //拿到 jdk源码中的DocumentBuilder 对象
       DocumentBuilder builder = factory.newDocumentBuilder();
       builder.setEntityResolver(entityResolver);
+      //下面做各种数据校验
       builder.setErrorHandler(new ErrorHandler() {
         @Override
         public void error(SAXParseException exception) throws SAXException {
@@ -255,6 +267,9 @@ public class XPathParser {
         public void warning(SAXParseException exception) throws SAXException {
         }
       });
+      //又是建造者的设计模式
+      //通过 DocumentBuilder对象去创建 Document（节点）把数据解析之后的对象；
+      //这行代码就已经解析了 整个xml文件了
       return builder.parse(inputSource);
     } catch (Exception e) {
       throw new BuilderException("Error creating document instance.  Cause: " + e, e);

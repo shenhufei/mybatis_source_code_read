@@ -102,7 +102,7 @@ public class ClassLoaderWrapper {
   }
 
   /**
-   * Try to get a resource from a group of classloaders
+   * 从拿到的类加载器中拿到一个可以使用的类加载器
    *
    * @param resource    - the resource to get
    * @param classLoader - the classloaders to examine
@@ -200,7 +200,12 @@ public class ClassLoaderWrapper {
     throw new ClassNotFoundException("Cannot find class: " + name);
 
   }
-
+/**
+ *  应该只返回固定的三种类加载器，
+ *  这里返回去的 有五个类加载器对象
+ * @param classLoader
+ * @return
+ */
   ClassLoader[] getClassLoaders(ClassLoader classLoader) {
     return new ClassLoader[]{
         classLoader,
