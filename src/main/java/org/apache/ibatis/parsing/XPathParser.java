@@ -269,7 +269,7 @@ public class XPathParser {
       });
       //又是建造者的设计模式
       //通过 DocumentBuilder对象去创建 Document（节点）把数据解析之后的对象；
-      //这行代码就已经解析了 整个xml文件了
+      //将xml的字节流对象转换成Document  对象，
       return builder.parse(inputSource);
     } catch (Exception e) {
       throw new BuilderException("Error creating document instance.  Cause: " + e, e);

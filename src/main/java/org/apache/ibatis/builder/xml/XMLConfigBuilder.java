@@ -47,6 +47,8 @@ import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.type.JdbcType;
 import org.w3c.dom.Document;
 
+import com.alibaba.fastjson.JSONArray;
+
 /**
  * @author Clinton Begin
  * @author Kazuki Shimizu
@@ -98,11 +100,16 @@ public class XMLConfigBuilder extends BaseBuilder {
   }
 
   public Configuration parse() {
+	  //针对  mybatis整体 的配置文件mybatis-config 只能被加载解析一次，加载多次就会抛出异常；
     if (parsed) {
       throw new BuilderException("Each XMLConfigBuilder can only be used once.");
     }
     parsed = true;
-    //从之前存储在XPathParser对象中拿到 Configuration 对象，
+    // 特别说明：1. XNode  节点对象是mybatis 自定义的对象， XNode对象中包含了 Node 节点对象 ，也包含了 XPathParser 对象
+    //1. Document 也是Node节点对象的一个子类，
+    //从之前存储xml对应的字节流转换成了 XPathParser 对象中 Document 字段中
+    //这里也就是XPathParser对象中拿到 Document 字段（对象）再通过 configuration 字符串
+    //拿到 Document 对象中存储的  configuration 节点对象
     parseConfiguration(parser.evalNode("/configuration"));
     return configuration;
   }
@@ -110,6 +117,7 @@ public class XMLConfigBuilder extends BaseBuilder {
   private void parseConfiguration(XNode root) {
     try {
       //issue #117 read properties first
+    	// System.out.print("XNode对象的数据是："+JSONArray.toJSONString(root));
       propertiesElement(root.evalNode("properties"));
       Properties settings = settingsAsProperties(root.evalNode("settings"));
       loadCustomVfs(settings);
@@ -277,17 +285,38 @@ public class XMLConfigBuilder extends BaseBuilder {
     configuration.setConfigurationFactory(resolveClass(props.getProperty("configurationFactory")));
   }
 
-  private void environmentsElement(XNode context) throws Exception {
+  /**
+ *   @Desc
+ *   @author shenhufei
+ *   @Date 2019年10月28日
+ */
+private void environmentsElement(XNode context) throws Exception {
     if (context != null) {
       if (environment == null) {
         environment = context.getStringAttribute("default");
       }
+      //单个的数据源配置是如下：
+      //<environments default="development">
+      //<environment id="development">
+      //<transactionManager type="JDBC"/>
+      //<dataSource type="POOLED">
+      //<property name="driver" value="com.mysql.jdbc.Driver"/>
+      //<property name="url" value="jdbc:mysql://cdb-ewlmquzk.bj.tencentcdb.com:10191/data_shf"/>
+      //<property name="username" value="root"/>
+      //<property name="password" value="shenhufei_"/>
+      //</dataSource>
+      //</environment>
+      //</environments>
+   // 此处是 循环，来解析这个配置，说明 数据源的配置是可以 配置多个的；
       for (XNode child : context.getChildren()) {
         String id = child.getStringAttribute("id");
         if (isSpecifiedEnvironment(id)) {
+        	//读取事物配置  <transactionManager type="JDBC"/>
           TransactionFactory txFactory = transactionManagerElement(child.evalNode("transactionManager"));
+          //拿到  <dataSource type="POOLED"> 配置
           DataSourceFactory dsFactory = dataSourceElement(child.evalNode("dataSource"));
           DataSource dataSource = dsFactory.getDataSource();
+          //拿到 TransactionFactory   DataSourceFactory  对象，再去创建  Environment 对象
           Environment.Builder environmentBuilder = new Environment.Builder(id)
               .transactionFactory(txFactory)
               .dataSource(dataSource);
@@ -309,6 +338,7 @@ public class XMLConfigBuilder extends BaseBuilder {
       databaseIdProvider = (DatabaseIdProvider) resolveClass(type).getDeclaredConstructor().newInstance();
       databaseIdProvider.setProperties(properties);
     }
+    //配置环境
     Environment environment = configuration.getEnvironment();
     if (environment != null && databaseIdProvider != null) {
       String databaseId = databaseIdProvider.getDatabaseId(environment.getDataSource());
@@ -320,6 +350,7 @@ public class XMLConfigBuilder extends BaseBuilder {
     if (context != null) {
       String type = context.getStringAttribute("type");
       Properties props = context.getChildrenAsProperties();
+      //创建事物工厂对象
       TransactionFactory factory = (TransactionFactory) resolveClass(type).getDeclaredConstructor().newInstance();
       factory.setProperties(props);
       return factory;
@@ -327,7 +358,12 @@ public class XMLConfigBuilder extends BaseBuilder {
     throw new BuilderException("Environment declaration requires a TransactionFactory.");
   }
 
-  private DataSourceFactory dataSourceElement(XNode context) throws Exception {
+  /**
+ *   @Desc  数据源工厂对象
+ *   @author shenhufei
+ *   @Date 2019年10月28日
+ */
+private DataSourceFactory dataSourceElement(XNode context) throws Exception {
     if (context != null) {
       String type = context.getStringAttribute("type");
       Properties props = context.getChildrenAsProperties();
@@ -365,9 +401,20 @@ public class XMLConfigBuilder extends BaseBuilder {
     }
   }
 
-  private void mapperElement(XNode parent) throws Exception {
+  /**
+ *   @Desc 这个方法才是去解析所有的 MapperXml文件的方法
+ *   @author shenhufei
+ *   @Date 2019年10月28日
+ */
+private void mapperElement(XNode parent) throws Exception {
     if (parent != null) {
+    	//入参是<mappers>
+    //	<mapper resource="org/apache/ibatis/Amy/UserMapper.xml"/>
+    //	</mappers>
+    	//父节点是mappers 可能会有多个mapper子节点，所以说就是  总的config配置文件中可以配置多个
+    	//<mapper resource="org/apache/ibatis/Amy/UserMapper.xml"/> 对象，所以此处是循环
       for (XNode child : parent.getChildren()) {
+    	  //判断MapperXml文件的路径是哪一种情况， 
         if ("package".equals(child.getName())) {
           String mapperPackage = child.getStringAttribute("name");
           configuration.addMappers(mapperPackage);
@@ -377,6 +424,7 @@ public class XMLConfigBuilder extends BaseBuilder {
           String mapperClass = child.getStringAttribute("class");
           if (resource != null && url == null && mapperClass == null) {
             ErrorContext.instance().resource(resource);
+            //根据 MapperXml文件的路径，将该文件变成字节流对象。
             InputStream inputStream = Resources.getResourceAsStream(resource);
             XMLMapperBuilder mapperParser = new XMLMapperBuilder(inputStream, configuration, resource, configuration.getSqlFragments());
             mapperParser.parse();
@@ -396,7 +444,13 @@ public class XMLConfigBuilder extends BaseBuilder {
     }
   }
 
-  private boolean isSpecifiedEnvironment(String id) {
+  /**
+ *   @Desc  环境这个配置不能为空  <environment id="development">  
+ *   environment 标签不能上，并且 id这个属性也不能少
+ *   @author shenhufei
+ *   @Date 2019年10月28日
+ */
+private boolean isSpecifiedEnvironment(String id) {
     if (environment == null) {
       throw new BuilderException("No environment specified.");
     } else if (id == null) {
