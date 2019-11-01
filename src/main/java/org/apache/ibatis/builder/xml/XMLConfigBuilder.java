@@ -107,7 +107,14 @@ public class XMLConfigBuilder extends BaseBuilder {
     return configuration;
   }
 
-  private void parseConfiguration(XNode root) {
+/**
+ * 解析全局的配置文件
+ * @date 2019年10月28日 
+ * @param 
+ * @return
+ * @author shenhufei
+ */
+private void parseConfiguration(XNode root) {
     try {
       //issue #117 read properties first
       propertiesElement(root.evalNode("properties"));
