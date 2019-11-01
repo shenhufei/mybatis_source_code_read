@@ -105,13 +105,19 @@ public class XMLMapperBuilder extends BaseBuilder {
     return sqlFragments.get(refid);
   }
 
-  private void configurationElement(XNode context) {
+  /**
+ *   @Desc 解析  dao层对应的 MapperXML 文件中的 mapper 标签下的所有的节点信息；
+ *   @author shenhufei
+ *   @Date 2019年10月28日
+ */
+private void configurationElement(XNode context) {
     try {
       String namespace = context.getStringAttribute("namespace");
       if (namespace == null || namespace.equals("")) {
         throw new BuilderException("Mapper's namespace cannot be empty");
       }
       builderAssistant.setCurrentNamespace(namespace);
+      //解析 cache-ref 标签
       cacheRefElement(context.evalNode("cache-ref"));
       cacheElement(context.evalNode("cache"));
       parameterMapElement(context.evalNodes("/mapper/parameterMap"));
@@ -123,7 +129,16 @@ public class XMLMapperBuilder extends BaseBuilder {
     }
   }
 
-  private void buildStatementFromContext(List<XNode> list) {
+  /**
+ *   @Desc 拿到所有的   select ,update ,delete ,insert  所有的节点数据数据，进行解析
+ *   [<select resultType="org.apache.ibatis.Amy.User" parameterType="java.lang.Long" id="selectUser">
+ *    select * from user where id = #{id}
+ *    </select>
+ *    ]
+ *   @author shenhufei
+ *   @Date 2019年10月28日
+ */
+private void buildStatementFromContext(List<XNode> list) {
     if (configuration.getDatabaseId() != null) {
       buildStatementFromContext(list, configuration.getDatabaseId());
     }
