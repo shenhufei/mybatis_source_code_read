@@ -175,7 +175,12 @@ public class Configuration {
    */
   protected final Map<String, String> cacheRefMap = new HashMap<>();
 
-  public Configuration(Environment environment) {
+/**
+ *   @Desc 有配置环境，就会用配置的；没有配置就会用下面的无参构造去创建
+ *   @author shenhufei
+ *   @Date 2019年10月29日
+ */
+public Configuration(Environment environment) {
     this();
     this.environment = environment;
   }

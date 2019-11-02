@@ -256,7 +256,12 @@ public class XMLConfigBuilder extends BaseBuilder {
     }
   }
 
-  private void settingsElement(Properties props) {
+  /**
+ *   @Desc 设置settings 的配置，如果用户有自己配置，用用户的，没有配置设置默认的
+ *   @author shenhufei
+ *   @Date 2019年10月29日
+ */
+private void settingsElement(Properties props) {
     configuration.setAutoMappingBehavior(AutoMappingBehavior.valueOf(props.getProperty("autoMappingBehavior", "PARTIAL")));
     configuration.setAutoMappingUnknownColumnBehavior(AutoMappingUnknownColumnBehavior.valueOf(props.getProperty("autoMappingUnknownColumnBehavior", "NONE")));
     configuration.setCacheEnabled(booleanValueOf(props.getProperty("cacheEnabled"), true));
