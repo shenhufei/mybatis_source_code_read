@@ -108,7 +108,12 @@ public class XNode {
     return xpathParser.evalDouble(node, expression);
   }
 
-  public List<XNode> evalNodes(String expression) {
+  /**
+ *   @Desc 该方法就是拿到固定标签的 标签对象，insert,update,delete,select
+ *   @author shenhufei
+ *   @Date 2019年11月4日
+ */
+public List<XNode> evalNodes(String expression) {
     return xpathParser.evalNodes(node, expression);
   }
 

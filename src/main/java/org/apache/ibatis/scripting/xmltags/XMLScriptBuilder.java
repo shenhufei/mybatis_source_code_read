@@ -43,7 +43,12 @@ public class XMLScriptBuilder extends BaseBuilder {
     this(configuration, context, null);
   }
 
-  public XMLScriptBuilder(Configuration configuration, XNode context, Class<?> parameterType) {
+  /**
+ *   @Desc  拿到了 sql 语句对应的 标签进行解析
+ *   @author shenhufei
+ *   @Date 2019年11月4日
+ */
+public XMLScriptBuilder(Configuration configuration, XNode context, Class<?> parameterType) {
     super(configuration);
     this.context = context;
     this.parameterType = parameterType;

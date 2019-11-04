@@ -109,7 +109,8 @@ public class XMLConfigBuilder extends BaseBuilder {
     //1. Document 也是Node节点对象的一个子类，
     //从之前存储xml对应的字节流转换成了 XPathParser 对象中 Document 字段中
     //这里也就是XPathParser对象中拿到 Document 字段（对象）再通过 configuration 字符串
-    //拿到 Document 对象中存储的  configuration 节点对象
+    //拿到 Document 对象中存储的  configuration 节点对象,  configuration 节点是所有配置文件总的父节点，所以解析
+    // configuration  就是解析整个配置文件/解析全局的配置文件；
     parseConfiguration(parser.evalNode("/configuration"));
     return configuration;
   }
@@ -126,6 +127,7 @@ private void parseConfiguration(XNode root) {
       //issue #117 read properties first
     	// System.out.print("XNode对象的数据是："+JSONArray.toJSONString(root));
       propertiesElement(root.evalNode("properties"));
+      //解析settings 设置
       Properties settings = settingsAsProperties(root.evalNode("settings"));
       loadCustomVfs(settings);
       loadCustomLogImpl(settings);
@@ -414,6 +416,7 @@ private DataSourceFactory dataSourceElement(XNode context) throws Exception {
   }
 
   /**
+   * 这个方法也是解析所有mapper.xml文件的总的入口
  *   @Desc 这个方法才是去解析所有的 MapperXml文件的方法
  *   @author shenhufei
  *   @Date 2019年10月28日

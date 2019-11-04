@@ -53,7 +53,15 @@ public class XMLStatementBuilder extends BaseBuilder {
     this.requiredDatabaseId = databaseId;
   }
 
-  public void parseStatementNode() {
+  /**
+ *   @Desc 该方法只是在解析 ：
+ *    <select id="selectUser" resultType="org.apache.ibatis.Amy.User"  parameterType="java.lang.Long" >
+    select * from user where id = #{id}
+    </select>    这样的sql 语句，因为还有很多数据，并不是我们常用的，比如说：超时时间 timeout  之类的
+ *   @author shenhufei
+ *   @Date 2019年11月4日
+ */
+public void parseStatementNode() {
     String id = context.getStringAttribute("id");
     String databaseId = context.getStringAttribute("databaseId");
 

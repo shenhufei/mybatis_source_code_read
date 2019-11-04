@@ -35,7 +35,12 @@ public class StaticSqlSource implements SqlSource {
     this(configuration, sql, null);
   }
 
-  public StaticSqlSource(Configuration configuration, String sql, List<ParameterMapping> parameterMappings) {
+  /**
+ *   @Desc 构建 sql源对象
+ *   @author shenhufei
+ *   @Date 2019年11月4日
+ */
+public StaticSqlSource(Configuration configuration, String sql, List<ParameterMapping> parameterMappings) {
     this.sql = sql;
     this.parameterMappings = parameterMappings;
     this.configuration = configuration;

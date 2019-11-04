@@ -127,6 +127,7 @@ public class MapperAnnotationBuilder {
     String resource = type.toString();
     if (!configuration.isResourceLoaded(resource)) {
       loadXmlResource();
+      //把已经解析的文件对应的接口的全路径存储起来；
       configuration.addLoadedResource(resource);
       assistant.setCurrentNamespace(type.getName());
       parseCache();
