@@ -204,6 +204,10 @@ public class ForEachSqlNode implements SqlNode {
       delegate.appendSql(sql);
     }
 
+    /* (non-Javadoc)
+     *  拿到执行的
+     * @see org.apache.ibatis.scripting.xmltags.DynamicContext#getSql()
+     */
     @Override
     public String getSql() {
       return delegate.getSql();

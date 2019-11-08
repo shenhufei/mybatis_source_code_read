@@ -22,6 +22,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 动态更新sql语句
  * @author Clinton Begin
  */
 @Documented

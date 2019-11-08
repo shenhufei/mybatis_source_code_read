@@ -89,8 +89,14 @@ public class XMLMapperBuilder extends BaseBuilder {
     this.resource = resource;
   }
 
-  public void parse() {
+  /**
+ *   @Desc 解析xml文件中的想起数据
+ *   @author shenhufei
+ *   @Date 2019年11月4日
+ */
+public void parse() {
     if (!configuration.isResourceLoaded(resource)) {
+    	//解析 config.xml文件中所有 配置的mapper.xml文件
       configurationElement(parser.evalNode("/mapper"));
       configuration.addLoadedResource(resource);
       bindMapperForNamespace();
@@ -117,12 +123,16 @@ private void configurationElement(XNode context) {
         throw new BuilderException("Mapper's namespace cannot be empty");
       }
       builderAssistant.setCurrentNamespace(namespace);
-      //解析 cache-ref 标签
+      //解析 cache-ref  缓存依赖标签
       cacheRefElement(context.evalNode("cache-ref"));
+    //缓存标签
       cacheElement(context.evalNode("cache"));
+      //参数标签
       parameterMapElement(context.evalNodes("/mapper/parameterMap"));
+      //结果集标签
       resultMapElements(context.evalNodes("/mapper/resultMap"));
       sqlElement(context.evalNodes("/mapper/sql"));
+      //解析 mapper.xml文件中所有的sql语句
       buildStatementFromContext(context.evalNodes("select|insert|update|delete"));
     } catch (Exception e) {
       throw new BuilderException("Error parsing Mapper XML. The XML location is '" + resource + "'. Cause: " + e, e);
@@ -145,7 +155,12 @@ private void buildStatementFromContext(List<XNode> list) {
     buildStatementFromContext(list, null);
   }
 
-  private void buildStatementFromContext(List<XNode> list, String requiredDatabaseId) {
+  /**
+ *   @Desc  解析单个mapper.xml文件所有的 sql语句 包括，insert ，update，delete，select
+ *   @author shenhufei
+ *   @Date 2019年11月4日
+ */
+private void buildStatementFromContext(List<XNode> list, String requiredDatabaseId) {
     for (XNode context : list) {
       final XMLStatementBuilder statementParser = new XMLStatementBuilder(configuration, builderAssistant, context, requiredDatabaseId);
       try {
@@ -433,7 +448,12 @@ private void buildStatementFromContext(List<XNode> list) {
     }
   }
 
-  private void bindMapperForNamespace() {
+  /**
+ *   @Desc 
+ *   @author shenhufei
+ *   @Date 2019年11月4日
+ */
+private void bindMapperForNamespace() {
     String namespace = builderAssistant.getCurrentNamespace();
     if (namespace != null) {
       Class<?> boundType = null;

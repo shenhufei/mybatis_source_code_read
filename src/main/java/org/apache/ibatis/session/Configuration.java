@@ -125,6 +125,7 @@ public class Configuration {
   protected Integer defaultFetchSize;
   protected ResultSetType defaultResultSetType;
   //默认的执行类型是简单型的
+  //默认是简单执行类
   protected ExecutorType defaultExecutorType = ExecutorType.SIMPLE;
   protected AutoMappingBehavior autoMappingBehavior = AutoMappingBehavior.PARTIAL;
   protected AutoMappingUnknownColumnBehavior autoMappingUnknownColumnBehavior = AutoMappingUnknownColumnBehavior.NONE;
@@ -314,7 +315,12 @@ public Configuration(Environment environment) {
     this.mapUnderscoreToCamelCase = mapUnderscoreToCamelCase;
   }
 
-  public void addLoadedResource(String resource) {
+  /**
+ *   @Desc 把已经解析过的xml文件对应的 接口的全路径记录下来，以备在后续的解析过程做去重操作；
+ *   @author shenhufei
+ *   @Date 2019年11月4日
+ */
+public void addLoadedResource(String resource) {
     loadedResources.add(resource);
   }
 

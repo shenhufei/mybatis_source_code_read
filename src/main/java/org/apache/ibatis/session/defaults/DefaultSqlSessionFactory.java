@@ -48,6 +48,7 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory {
 
   @Override
   public SqlSession openSession() {
+	  //最简单的那种执行类型
     return openSessionFromDataSource(configuration.getDefaultExecutorType(), null, false);
   }
 
@@ -102,8 +103,10 @@ private SqlSession openSessionFromDataSource(ExecutorType execType, TransactionI
     try {
       final Environment environment = configuration.getEnvironment();
       //TransactionFactory 对象是 Environment对象
+      //通过 Environment 环境对象获取  TransactionFactory 获取事物工厂类
       final TransactionFactory transactionFactory = getTransactionFactoryFromEnvironment(environment);
       //建造者模式，通过 TransactionFactory 事物工厂来创建事物对象
+      //通过 事物工厂类 以及 环境对象 再去创建 事物对象，
       tx = transactionFactory.newTransaction(environment.getDataSource(), level, autoCommit);
       final Executor executor = configuration.newExecutor(tx, execType);
       return new DefaultSqlSession(configuration, executor, autoCommit);

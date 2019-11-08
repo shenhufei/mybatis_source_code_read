@@ -14,6 +14,7 @@
  *    limitations under the License.
  */
 /**
+ * 不用连接池的链接方式
  * Hyper-simple Datasource.
  */
 package org.apache.ibatis.datasource.unpooled;

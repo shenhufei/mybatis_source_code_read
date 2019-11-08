@@ -36,6 +36,12 @@ import org.apache.ibatis.logging.LogFactory;
  *
  * @author Clinton Begin
  */
+/**
+ * 使用线程池连接的类
+ *   @Desc
+ *   @author shenhufei
+ *   @Date 2019年11月4日
+ */
 public class PooledDataSource implements DataSource {
 
   private static final Log log = LogFactory.getLog(PooledDataSource.class);

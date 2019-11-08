@@ -26,6 +26,12 @@ import org.apache.ibatis.reflection.ExceptionUtil;
 /**
  * @author Clinton Begin
  */
+/**
+ *  连接池对象中的连接对象，
+ *   @Desc
+ *   @author shenhufei
+ *   @Date 2019年11月4日
+ */
 class PooledConnection implements InvocationHandler {
 
   private static final String CLOSE = "close";
