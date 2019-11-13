@@ -61,7 +61,7 @@ public final class TypeHandlerRegistry {
   private static final Map<JdbcType, TypeHandler<?>> NULL_TYPE_HANDLER_MAP = Collections.emptyMap();
 
   private Class<? extends TypeHandler> defaultEnumTypeHandler = EnumTypeHandler.class;
-
+//注册数据类型执行器
   public TypeHandlerRegistry() {
     register(Boolean.class, new BooleanTypeHandler());
     register(boolean.class, new BooleanTypeHandler());
@@ -173,7 +173,12 @@ public final class TypeHandlerRegistry {
     this.defaultEnumTypeHandler = typeHandler;
   }
 
-  public boolean hasTypeHandler(Class<?> javaType) {
+  /**
+ *   @Desc 判断有没有该类型的 数据类型转换器
+ *   @author shenhufei
+ *   @Date 2019年11月13日
+ */
+public boolean hasTypeHandler(Class<?> javaType) {
     return hasTypeHandler(javaType, null);
   }
 

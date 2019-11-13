@@ -148,11 +148,15 @@ public class Configuration {
   protected Class<?> configurationFactory;
 
   protected final MapperRegistry mapperRegistry = new MapperRegistry(this);
+  //拦截器注册
   protected final InterceptorChain interceptorChain = new InterceptorChain();
+  //注册所有的数据执行类，也就是java转mysql,mysql转Java数据类型
   protected final TypeHandlerRegistry typeHandlerRegistry = new TypeHandlerRegistry();
+  //注册SQL语句标签中的参数数据类型和java类的一一对应关系，也就是为啥在<select >标签中数据类型是 int ,也能自动识别是Integer类型
   protected final TypeAliasRegistry typeAliasRegistry = new TypeAliasRegistry();
+  //
   protected final LanguageDriverRegistry languageRegistry = new LanguageDriverRegistry();
-
+// 以下都是配置类种预先初始化的一些map集合类，并且括号里的数据都是该集合的名称；
   protected final Map<String, MappedStatement> mappedStatements = new StrictMap<MappedStatement>("Mapped Statements collection")
       .conflictMessageProducer((savedValue, targetValue) ->
           ". please check " + savedValue.getResource() + " and " + targetValue.getResource());
@@ -186,7 +190,12 @@ public Configuration(Environment environment) {
     this.environment = environment;
   }
 
-  public Configuration() {
+  /**
+ *   @Desc <set> 标签中的属性，
+ *   @author shenhufei
+ *   @Date 2019年11月13日
+ */
+public Configuration() {
     typeAliasRegistry.registerAlias("JDBC", JdbcTransactionFactory.class);
     typeAliasRegistry.registerAlias("MANAGED", ManagedTransactionFactory.class);
 

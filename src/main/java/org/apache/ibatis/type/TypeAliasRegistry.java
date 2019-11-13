@@ -39,7 +39,12 @@ public class TypeAliasRegistry {
 
   private final Map<String, Class<?>> typeAliases = new HashMap<>();
 
-  public TypeAliasRegistry() {
+  /**
+ *   @Desc 注册数据标签中的参数数据类型和java类的对应关系
+ *   @author shenhufei
+ *   @Date 2019年11月13日
+ */
+public TypeAliasRegistry() {
     registerAlias("string", String.class);
 
     registerAlias("byte", Byte.class);

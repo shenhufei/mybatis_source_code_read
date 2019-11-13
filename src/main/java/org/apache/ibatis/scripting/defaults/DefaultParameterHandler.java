@@ -58,7 +58,12 @@ public class DefaultParameterHandler implements ParameterHandler {
     return parameterObject;
   }
 
-  @Override
+  /**
+ *   @Desc 做赋值操作
+ *   @author shenhufei
+ *   @Date 2019年11月13日
+ */
+@Override
   public void setParameters(PreparedStatement ps) {
     ErrorContext.instance().activity("setting parameters").object(mappedStatement.getParameterMap().getId());
     List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
@@ -67,8 +72,11 @@ public class DefaultParameterHandler implements ParameterHandler {
         ParameterMapping parameterMapping = parameterMappings.get(i);
         if (parameterMapping.getMode() != ParameterMode.OUT) {
           Object value;
+          //拿到参数名
           String propertyName = parameterMapping.getProperty();
+          //校验这个参数名是否已经添加到了 boundSql绑定的sql 对象中的 additionalParameters 这个Map集合中，
           if (boundSql.hasAdditionalParameter(propertyName)) { // issue #448 ask first for additional params
+        	  
             value = boundSql.getAdditionalParameter(propertyName);
           } else if (parameterObject == null) {
             value = null;
@@ -78,12 +86,14 @@ public class DefaultParameterHandler implements ParameterHandler {
             MetaObject metaObject = configuration.newMetaObject(parameterObject);
             value = metaObject.getValue(propertyName);
           }
+          //获取这个参数对应的数据转换器
           TypeHandler typeHandler = parameterMapping.getTypeHandler();
           JdbcType jdbcType = parameterMapping.getJdbcType();
           if (value == null && jdbcType == null) {
             jdbcType = configuration.getJdbcTypeForNull();
           }
           try {
+        	  //拿到用数据转换器做参数的转换
             typeHandler.setParameter(ps, i + 1, value, jdbcType);
           } catch (TypeException | SQLException e) {
             throw new TypeException("Could not set parameters for mapping: " + parameterMapping + ". Cause: " + e, e);

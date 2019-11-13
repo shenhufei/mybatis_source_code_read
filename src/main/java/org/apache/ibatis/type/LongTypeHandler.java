@@ -24,27 +24,47 @@ import java.sql.SQLException;
  * @author Clinton Begin
  */
 public class LongTypeHandler extends BaseTypeHandler<Long> {
-
+	/**
+	 *   @Desc 将java对象的数据类型转换成数据库对象的数据类型
+	 *   @author shenhufei
+	 *   @Date 2019年11月13日
+	 */
   @Override
   public void setNonNullParameter(PreparedStatement ps, int i, Long parameter, JdbcType jdbcType)
       throws SQLException {
     ps.setLong(i, parameter);
   }
 
-  @Override
+  /**
+ *   @Desc
+ *   @author shenhufei
+ *   @Date 2019年11月13日
+ */
+@Override
   public Long getNullableResult(ResultSet rs, String columnName)
       throws SQLException {
+	  //从resultset对象中获取从数据拿到的数据
     long result = rs.getLong(columnName);
+    //进行赋值操作
     return result == 0 && rs.wasNull() ? null : result;
   }
 
-  @Override
+  /**
+ *   @Desc 从数据库返回值中拿到对应java的数据类型
+ *   @author shenhufei
+ *   @Date 2019年11月13日
+ */
+@Override
   public Long getNullableResult(ResultSet rs, int columnIndex)
       throws SQLException {
     long result = rs.getLong(columnIndex);
     return result == 0 && rs.wasNull() ? null : result;
   }
-
+/**
+ *   @Desc 从数据库返回值中拿到对应java的数据类型
+ *   @author shenhufei
+ *   @Date 2019年11月13日
+ */
   @Override
   public Long getNullableResult(CallableStatement cs, int columnIndex)
       throws SQLException {
