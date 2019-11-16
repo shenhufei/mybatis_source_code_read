@@ -34,13 +34,23 @@ import org.apache.ibatis.transaction.Transaction;
 /**
  * @author Clinton Begin
  */
+/**
+ *   @Desc 简单执行器
+ *   @author shenhufei
+ *   @Date 2019年11月16日
+ */
 public class SimpleExecutor extends BaseExecutor {
 
   public SimpleExecutor(Configuration configuration, Transaction transaction) {
     super(configuration, transaction);
   }
 
-  @Override
+  /**
+ *   @Desc//简单的执行
+ *   @author shenhufei
+ *   @Date 2019年11月16日
+ */
+@Override 
   public int doUpdate(MappedStatement ms, Object parameter) throws SQLException {
     Statement stmt = null;
     try {
@@ -80,7 +90,13 @@ public class SimpleExecutor extends BaseExecutor {
     return Collections.emptyList();
   }
 
-  private Statement prepareStatement(StatementHandler handler, Log statementLog) throws SQLException {
+  /**
+   *   @Desc  获取mysql 数据库的连接还是调用mysql-connector 包中间的方法去执行的
+   *   具体怎么获得连接的，mysql-connector  包中的实现过于复杂，没有必要过于深究；
+   *   @author shenhufei
+   *   @Date 2019年11月16日
+   */
+private Statement prepareStatement(StatementHandler handler, Log statementLog) throws SQLException {
     Statement stmt;
     Connection connection = getConnection(statementLog);
     stmt = handler.prepare(connection, transaction.getTimeout());

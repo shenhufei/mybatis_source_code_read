@@ -6,4 +6,7 @@
   <select id="selectUser" resultType="org.apache.ibatis.Amy.User"  parameterType="java.lang.Long" >
     select * from user where id = #{id}
   </select>
+  <update id ="update"  parameterType="java.lang.String"  >
+   update user set name =#{name} where id  =1;
+  </update>
 </mapper>

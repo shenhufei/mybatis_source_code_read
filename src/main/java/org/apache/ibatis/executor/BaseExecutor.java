@@ -110,11 +110,13 @@ public abstract class BaseExecutor implements Executor {
   @Override
   public int update(MappedStatement ms, Object parameter) throws SQLException {
     ErrorContext.instance().resource(ms.getResource()).activity("executing an update").object(ms.getId());
+    //判断执行器有没有关闭，但是为啥要在这里判断？？？？
     if (closed) {
       throw new ExecutorException("Executor was closed.");
     }
     //做update 相关的操作，需要先把缓存清除；
     clearLocalCache();
+    //根据这个sql的类型，然后再去看具体由哪个执行类去执行sql操作
     return doUpdate(ms, parameter);
   }
 
@@ -239,6 +241,7 @@ public abstract class BaseExecutor implements Executor {
     if (closed) {
       throw new ExecutorException("Cannot commit, transaction is already closed");
     }
+    // 做增删改的时候需要清理缓存数据；
     clearLocalCache();
     flushStatements();
     if (required) {
@@ -263,6 +266,7 @@ public abstract class BaseExecutor implements Executor {
   @Override
   public void clearLocalCache() {
     if (!closed) {
+    	//为啥这里是需要清除两个缓存
       localCache.clear();
       localOutputParameterCache.clear();
     }
@@ -333,7 +337,13 @@ public abstract class BaseExecutor implements Executor {
     return list;
   }
 
-  protected Connection getConnection(Log statementLog) throws SQLException {
+  /**
+ *   @Desc  获取mysql 数据库的连接还是调用mysql-connector 包中间的方法去执行的
+ *   具体怎么获得连接的，mysql-connector  包中的实现过于复杂，没有必要过于深究；
+ *   @author shenhufei
+ *   @Date 2019年11月16日
+ */
+protected Connection getConnection(Log statementLog) throws SQLException {
     Connection connection = transaction.getConnection();
     if (statementLog.isDebugEnabled()) {
       return ConnectionLogger.newInstance(connection, statementLog, queryStack);

@@ -25,6 +25,11 @@ import org.apache.ibatis.reflection.ArrayUtil;
 /**
  * @author Clinton Begin
  */
+/**
+ *   @Desc 缓存的key 对象
+ *   @author shenhufei
+ *   @Date 2019年11月14日
+ */
 public class CacheKey implements Cloneable, Serializable {
 
   private static final long serialVersionUID = 1146682552656046210L;

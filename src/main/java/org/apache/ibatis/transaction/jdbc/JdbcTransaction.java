@@ -62,7 +62,12 @@ public class JdbcTransaction implements Transaction {
     return connection;
   }
 
-  @Override
+  /**
+ *   @Desc 这个提交方法是mybatis自己的实现方式 ，本质也都是调用了MySQL-connector包中的提交的方法实现
+ *   @author shenhufei
+ *   @Date 2019年11月16日
+ */
+@Override
   public void commit() throws SQLException {
     if (connection != null && !connection.getAutoCommit()) {
       if (log.isDebugEnabled()) {
@@ -135,6 +140,7 @@ public class JdbcTransaction implements Transaction {
     if (log.isDebugEnabled()) {
       log.debug("Opening JDBC Connection");
     }
+    //调用的是 mysql-connector 包中的获取MySQL数据连接的方法；
     connection = dataSource.getConnection();
     if (level != null) {
       connection.setTransactionIsolation(level.getLevel());

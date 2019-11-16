@@ -17,4 +17,6 @@ package org.apache.ibatis.Amy;
 
 public interface UserMapper {
        public User selectUser(Long id);
+       
+        public void update(String name);
 }

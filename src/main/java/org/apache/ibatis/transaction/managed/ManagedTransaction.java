@@ -62,7 +62,12 @@ public class ManagedTransaction implements Transaction {
     return this.connection;
   }
 
-  @Override
+  /**
+ *   @Desc 这个是mybatis 提供的可以拓展自定义的提交的方法，
+ *   @author shenhufei
+ *   @Date 2019年11月16日
+ */
+@Override
   public void commit() throws SQLException {
     // Does nothing
   }

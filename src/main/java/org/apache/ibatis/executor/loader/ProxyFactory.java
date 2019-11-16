@@ -24,6 +24,11 @@ import org.apache.ibatis.session.Configuration;
 /**
  * @author Eduardo Macarron
  */
+/**
+ *   @Desc 代理工厂类，两种实现，jdk，cglib实现
+ *   @author shenhufei
+ *   @Date 2019年11月14日
+ */
 public interface ProxyFactory {
 
   default void setProperties(Properties properties) {

@@ -40,6 +40,9 @@ public class NoKeyGenerator implements KeyGenerator {
   @Override
   public void processAfter(Executor executor, MappedStatement ms, Statement stmt, Object parameter) {
     // Do Nothing
+	 System.out.print("这个空方法被执行了；充分说明，这个修改的方法，其实在这里并没有通过mysql-connector"
+	 		+ "连接包去真正执行更新（新增，修改，删除）语句；最终是commit提交的时候才真正的去值了所有的新增，修改，删除，"
+	 		+ "的语句");
   }
 
 }

@@ -45,6 +45,11 @@ import org.apache.ibatis.session.SqlSession;
  *
  * @author Clinton Begin
  */
+/**
+ *   @Desc 该类是默认的执行 crud 操作的类
+ *   @author shenhufei
+ *   @Date 2019年11月16日
+ */
 public class DefaultSqlSession implements SqlSession {
 
   private final Configuration configuration;
@@ -189,7 +194,12 @@ public class DefaultSqlSession implements SqlSession {
     return update(statement, null);
   }
 
-  @Override
+  /**
+ *   @Desc  
+ *   @author shenhufei
+ *   @Date 2019年11月16日
+ */
+@Override
   public int update(String statement, Object parameter) {
     try {
       dirty = true;
@@ -212,7 +222,12 @@ public class DefaultSqlSession implements SqlSession {
     return update(statement, parameter);
   }
 
-  @Override
+  /**
+ *   @Desc update方法已经调用了MySQL-connector 包的方法去执行了，
+ *   @author shenhufei
+ *   @Date 2019年11月16日
+ */
+@Override 
   public void commit() {
     commit(false);
   }
@@ -312,7 +327,12 @@ public class DefaultSqlSession implements SqlSession {
     cursorList.add(cursor);
   }
 
-  private boolean isCommitOrRollbackRequired(boolean force) {
+  /**
+ *   @Desc 判断是否需要去做提交操作
+ *   @author shenhufei
+ *   @Date 2019年11月16日
+ */
+private boolean isCommitOrRollbackRequired(boolean force) {
     return (!autoCommit && dirty) || force;
   }
   

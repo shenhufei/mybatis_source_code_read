@@ -31,6 +31,11 @@ import org.apache.ibatis.session.Configuration;
 /**
  * @author Clinton Begin
  */
+/**
+ *   @Desc 记录单条sql 标签对应的所有 原始信息数据 ,以及缓存信息
+ *   @author shenhufei
+ *   @Date 2019年11月14日
+ */
 public final class MappedStatement {
 
   private String resource;
