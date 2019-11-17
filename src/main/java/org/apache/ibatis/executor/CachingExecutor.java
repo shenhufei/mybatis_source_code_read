@@ -90,18 +90,28 @@ public class CachingExecutor implements Executor {
     return delegate.queryCursor(ms, parameter, rowBounds);
   }
 
-  @Override
+  /**
+ *   @Desc 做查询操作
+ *   @author shenhufei
+ *   @Date 2019年11月17日
+ */
+@Override
   public <E> List<E> query(MappedStatement ms, Object parameterObject, RowBounds rowBounds, ResultHandler resultHandler, CacheKey key, BoundSql boundSql)
       throws SQLException {
+	//从 MappedStatement对象（这个对象也就是记录了一个<select> 标签语句对应的相关的所有的信息）中获取缓存
     Cache cache = ms.getCache();
+    //判断这个这个缓存对象是否存在；
     if (cache != null) {
       flushCacheIfRequired(ms);
       if (ms.isUseCache() && resultHandler == null) {
         ensureNoOutParams(ms, boundSql);
         @SuppressWarnings("unchecked")
+        //从缓存中拿到对应的结果集
         List<E> list = (List<E>) tcm.getObject(cache, key);
+        //如果结果集为空，那么再去数据库再查询一次，
         if (list == null) {
           list = delegate.query(ms, parameterObject, rowBounds, resultHandler, key, boundSql);
+          //并且接连上一步查询之后，再又一次的去刷新缓存；
           tcm.putObject(cache, key, list); // issue #578 and #116
         }
         return list;

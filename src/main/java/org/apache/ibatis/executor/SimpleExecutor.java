@@ -63,7 +63,12 @@ public class SimpleExecutor extends BaseExecutor {
     }
   }
 
-  @Override
+  /**
+ *   @Desc 简单执行类的查询数据
+ *   @author shenhufei
+ *   @Date 2019年11月17日
+ */
+@Override
   public <E> List<E> doQuery(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) throws SQLException {
     Statement stmt = null;
     try {

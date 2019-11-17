@@ -324,12 +324,17 @@ public abstract class BaseExecutor implements Executor {
 
   private <E> List<E> queryFromDatabase(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, CacheKey key, BoundSql boundSql) throws SQLException {
     List<E> list;
+    //这个位置为啥先要设置一个key 对应一个  EXECUTION_PLACEHOLDER 类似于站位的操作
     localCache.putObject(key, EXECUTION_PLACEHOLDER);
     try {
+    	//查询到数据
       list = doQuery(ms, parameter, rowBounds, resultHandler, boundSql);
     } finally {
+    	// 由于 上面的doquery操作直接是查询的数据库，这个时候相同的查询条件对应的数据库的结果集已经发生变化
+    	//所以在这个位置上，需要把这个缓存key对应的数据先删除，然后再在下面的put方法中将数据再次缓存起来；
       localCache.removeObject(key);
     }
+    //先将缓存删除再向新的查询结果数据放入缓存当中；
     localCache.putObject(key, list);
     if (ms.getStatementType() == StatementType.CALLABLE) {
       localOutputParameterCache.putObject(key, parameter);

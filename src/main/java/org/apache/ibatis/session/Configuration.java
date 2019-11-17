@@ -158,6 +158,10 @@ public class Configuration {
   //
   protected final LanguageDriverRegistry languageRegistry = new LanguageDriverRegistry();
 // 以下都是配置类种预先初始化的一些map集合类，并且括号里的数据都是该集合的名称；
+ // 初始化的时候都会去加载xml文件中的<select> <update> <insert> <delete> 对应的语句的所有相关的信息存储在 
+  // Map<String, MappedStatement> mappedStatements对象中;
+  //  这个对象的Key就是 <select> <update> <insert> <delete> 标签对应的mapper接口中的方法的全路径
+  // eg：org.apache.ibatis.Amy.UserMapper.selectUser  这个就是的。
   protected final Map<String, MappedStatement> mappedStatements = new StrictMap<MappedStatement>("Mapped Statements collection")
       .conflictMessageProducer((savedValue, targetValue) ->
           ". please check " + savedValue.getResource() + " and " + targetValue.getResource());

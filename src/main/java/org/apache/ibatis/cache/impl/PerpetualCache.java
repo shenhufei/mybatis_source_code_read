@@ -56,6 +56,7 @@ public class PerpetualCache implements Cache {
 
   @Override
   public Object removeObject(Object key) {
+	  //删除map缓存对象中的key对应的值
     return cache.remove(key);
   }
 
