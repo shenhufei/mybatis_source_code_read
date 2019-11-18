@@ -15,8 +15,12 @@
  */
 package org.apache.ibatis.Amy;
 
+import java.util.List;
+
 public interface UserMapper {
        public User selectUser(Long id);
        
         public void update(String name);
+        
+        public List<User> selectAll();
 }

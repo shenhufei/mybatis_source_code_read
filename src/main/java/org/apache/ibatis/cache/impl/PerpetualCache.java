@@ -24,6 +24,11 @@ import org.apache.ibatis.cache.CacheException;
 /**
  * @author Clinton Begin
  */
+/**
+ *   @Desc mybatis 存放缓存的地方；
+ *   @author shenhufei
+ *   @Date 2019年11月18日
+ */
 public class PerpetualCache implements Cache {
 
   private final String id;
@@ -49,9 +54,17 @@ public class PerpetualCache implements Cache {
     cache.put(key, value);
   }
 
-  @Override
+  /**
+ *   @Desc 最终获取缓存的地方
+ *   @author shenhufei
+ *   @Date 2019年11月18日
+ */
+@Override
   public Object getObject(Object key) {
-    return cache.get(key);
+	  Object object = cache.get(key);
+	  System.out.println(object);
+      return object ;
+    		
   }
 
   @Override

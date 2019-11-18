@@ -1,8 +1,10 @@
-package org.apache.ibatis.Amy;
+package org.apache.ibatis.Amy.start;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
+import org.apache.ibatis.Amy.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
@@ -23,6 +25,8 @@ public class StartDemo {
 		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		SqlSession session = sqlSessionFactory.openSession();
 		User user = session.selectOne("org.apache.ibatis.Amy.UserMapper.selectUser",1L);
+		List<Object> selectList = session.selectList("org.apache.ibatis.Amy.UserMapper.selectAll");
+		log.error(selectList.toString());
 		log.error(user.toString());
 		System.out.print("");
 	}

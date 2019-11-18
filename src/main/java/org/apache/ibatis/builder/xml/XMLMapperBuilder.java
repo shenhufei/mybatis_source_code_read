@@ -228,7 +228,13 @@ private void buildStatementFromContext(List<XNode> list, String requiredDatabase
     }
   }
 
-  private void cacheElement(XNode context) {
+  /**
+ *   @Desc  如果没有  xml 文件中 没有cache 这个标签，那么就是这个位置就无法解析这个缓存，那么也就是二级环境不开启，
+ *   那么 也就是从二级缓存中拿不到数据；这个位置的标签也不用解析；
+ *   @author shenhufei
+ *   @Date 2019年11月18日
+ */
+private void cacheElement(XNode context) {
     if (context != null) {
       String type = context.getStringAttribute("type", "PERPETUAL");
       Class<? extends Cache> typeClass = typeAliasRegistry.resolveAlias(type);

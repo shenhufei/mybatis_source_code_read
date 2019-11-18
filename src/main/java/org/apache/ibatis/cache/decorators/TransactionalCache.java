@@ -66,6 +66,7 @@ public class TransactionalCache implements Cache {
     // issue #116
     Object object = delegate.getObject(key);
     if (object == null) {
+    	//缓存不在的key存储起来
       entriesMissedInCache.add(key);
     }
     // issue #146

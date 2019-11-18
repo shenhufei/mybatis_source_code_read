@@ -152,7 +152,10 @@ public abstract class BaseExecutor implements Executor {
     List<E> list;
     try {
       queryStack++;
+      //从二级缓存（其实不应该做严格的一级，二级区分，因为最终都是从PerpetualMap集合中拿到该缓存数据）
+      //中拿数据没有拿到，那么就会在这里从一级缓存中拿数据
       list = resultHandler == null ? (List<E>) localCache.getObject(key) : null;
+      //如果一级缓存也没有拿到数据，那么下面的代码就要直接去数据库查询了
       if (list != null) {
         handleLocallyCachedOutputParameters(ms, key, parameter, boundSql);
       } else {
@@ -331,10 +334,10 @@ public abstract class BaseExecutor implements Executor {
       list = doQuery(ms, parameter, rowBounds, resultHandler, boundSql);
     } finally {
     	// 由于 上面的doquery操作直接是查询的数据库，这个时候相同的查询条件对应的数据库的结果集已经发生变化
-    	//所以在这个位置上，需要把这个缓存key对应的数据先删除，然后再在下面的put方法中将数据再次缓存起来；
+    	//所以在这个位置上，需要把这个缓存key对应的数据先删除，然后再在下面的put方法中将数据缓存到一级缓存中；
       localCache.removeObject(key);
     }
-    //先将缓存删除再向新的查询结果数据放入缓存当中；
+    //先将缓存删除再向新的查询结果数据放入一级缓存当中；
     localCache.putObject(key, list);
     if (ms.getStatementType() == StatementType.CALLABLE) {
       localOutputParameterCache.putObject(key, parameter);
