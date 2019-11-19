@@ -25,6 +25,11 @@ import org.apache.ibatis.cache.Cache;
  *
  * @author Clinton Begin
  */
+/**
+ *   @Desc 基于lru思想的一种缓存算法，mybatis 默认使用的缓存淘汰方式就是这种；
+ *   @author shenhufei
+ *   @Date 2019年11月19日
+ */
 public class LruCache implements Cache {
 
   private final Cache delegate;
@@ -67,7 +72,12 @@ public class LruCache implements Cache {
     cycleKeyList(key);
   }
 
-  @Override
+  /**
+ *   @Desc  这个方法最终还是获取缓存的上一层的代码，是在map中通过键获取值，来获取缓存的；
+ *   @author shenhufei
+ *   @Date 2019年11月19日
+ */
+@Override
   public Object getObject(Object key) {
     keyMap.get(key); //touch
     return delegate.getObject(key);

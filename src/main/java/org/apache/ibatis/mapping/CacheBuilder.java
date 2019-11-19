@@ -37,6 +37,11 @@ import org.apache.ibatis.reflection.SystemMetaObject;
 /**
  * @author Clinton Begin
  */
+/**
+ *   @Desc  当mapper.xml配置文件中有cache 标签的时候才会在启动的时候去 构建缓存对象
+ *   @author shenhufei
+ *   @Date 2019年11月19日
+ */
 public class CacheBuilder {
   private final String id;
   private Class<? extends Cache> implementation;

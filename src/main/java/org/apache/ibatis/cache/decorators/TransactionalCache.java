@@ -35,6 +35,11 @@ import org.apache.ibatis.logging.LogFactory;
  * @author Clinton Begin
  * @author Eduardo Macarron
  */
+/**
+ *   @Desc TODO 该类的作用是啥
+ *   @author shenhufei
+ *   @Date 2019年11月19日
+ */
 public class TransactionalCache implements Cache {
 
   private static final Log log = LogFactory.getLog(TransactionalCache.class);
@@ -64,6 +69,7 @@ public class TransactionalCache implements Cache {
   @Override
   public Object getObject(Object key) {
     // issue #116
+	  // 这里依旧是没有直接调用本类的map缓存，而是去lrucache中拿
     Object object = delegate.getObject(key);
     if (object == null) {
     	//缓存不在的key存储起来
@@ -80,6 +86,7 @@ public class TransactionalCache implements Cache {
   @Override
   public void putObject(Object key, Object object) {
     entriesToAddOnCommit.put(key, object);
+   System.out.println("缓存长度是："+entriesToAddOnCommit.size());
   }
 
   @Override

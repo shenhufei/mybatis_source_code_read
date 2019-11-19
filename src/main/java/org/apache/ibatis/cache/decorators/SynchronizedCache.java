@@ -43,7 +43,12 @@ public class SynchronizedCache implements Cache {
     delegate.putObject(key, object);
   }
 
-  @Override
+  /**
+ *   @Desc 注意从缓存中拿数据的时候，这个位置是加了 synchronized锁；这段逻辑只有获取二级缓存的时候才会走
+ *   @author shenhufei
+ *   @Date 2019年11月19日
+ */
+@Override
   public synchronized Object getObject(Object key) {
     return delegate.getObject(key);
   }

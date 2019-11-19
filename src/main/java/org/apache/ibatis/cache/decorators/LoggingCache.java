@@ -49,7 +49,13 @@ public class LoggingCache implements Cache {
     delegate.putObject(key, object);
   }
 
-  @Override
+  /** 
+ *   @Desc  只是从 Loggercache对象的这个方法中过一下，让这个方法记录一下缓存命中率是多少；然后在下面
+ *    缓存命中次数和请求次数相除，就能等到缓存命中率；
+ *   @author shenhufei
+ *   @Date 2019年11月19日
+ */
+@Override
   public Object getObject(Object key) {
     requests++;
     final Object value = delegate.getObject(key);

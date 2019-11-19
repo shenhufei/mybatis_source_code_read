@@ -107,17 +107,20 @@ public class CachingExecutor implements Executor {
       if (ms.isUseCache() && resultHandler == null) {
         ensureNoOutParams(ms, boundSql);
         @SuppressWarnings("unchecked")
-        //从二级缓存中拿到对应的结果集 TODO 
+        //走的二级缓存的逻辑；二级缓存中拿到对应的结果集 
+        //TODO for循环中多次走到此处，查询都是为null；
         List<E> list = (List<E>) tcm.getObject(cache, key);
         //如果结果集为空，那么再去数据库再查询一次，
         if (list == null) {
+        	// 二级缓存的逻辑中没有，那么就去做查询，这次的查询中还会再去调用一级缓存，看在一级缓存中是否存在
           list = delegate.query(ms, parameterObject, rowBounds, resultHandler, key, boundSql);
-          //并且接连上一步查询之后，再又一次的去刷新二级缓存；
+          //并且接连上一步查询之后，再又一次的去缓存事物缓存TransactionalCache中；
           tcm.putObject(cache, key, list); // issue #578 and #116
         }
         return list;
       }
     }
+    //走一级缓存的逻辑
     return delegate.query(ms, parameterObject, rowBounds, resultHandler, key, boundSql);
   }
 

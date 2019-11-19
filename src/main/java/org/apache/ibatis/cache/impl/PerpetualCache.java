@@ -52,6 +52,7 @@ public class PerpetualCache implements Cache {
   @Override
   public void putObject(Object key, Object value) {
     cache.put(key, value);
+    System.out.println("缓存长度是："+cache.size());
   }
 
   /**
@@ -61,6 +62,7 @@ public class PerpetualCache implements Cache {
  */
 @Override
   public Object getObject(Object key) {
+	System.out.println("缓存长度是："+cache.size());
 	  Object object = cache.get(key);
 	  System.out.println(object);
       return object ;

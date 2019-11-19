@@ -32,6 +32,8 @@ public class TransactionalCacheManager {
   }
 
   public Object getObject(Cache cache, CacheKey key) {
+	  System.out.println("cache:"+cache);
+	  System.out.println("key:"+key);
     return getTransactionalCache(cache).getObject(key);
   }
 
