@@ -28,6 +28,7 @@ import org.apache.ibatis.cache.CacheException;
  *   @Desc mybatis 存放缓存的地方；
  *   @author shenhufei
  *   @Date 2019年11月18日
+ *    Perpetual  音标  pərˈpeCHo͞oəl
  */
 public class PerpetualCache implements Cache {
 
