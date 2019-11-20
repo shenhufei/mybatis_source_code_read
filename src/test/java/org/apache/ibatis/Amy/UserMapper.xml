@@ -10,7 +10,7 @@
    update user set name =#{name} where id  =1;
   </update>
   
-  <cache/>
+  
   
   <select id="selectAll" resultType="org.apache.ibatis.Amy.User"  >
     select * from user 

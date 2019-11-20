@@ -57,7 +57,13 @@ public class PerpetualCache implements Cache {
   }
 
   /**
- *   @Desc 最终获取缓存的地方
+ *   @Desc 最终获取缓存的地方；
+ *   TODO
+ *   1.开启二级缓存的时候很奇怪，相同的查询key,在不同的调用路径中结果是不一样的，具体表现为：
+ *   1.1从 TransactionalCache 过来的调用，都是为空；
+ *   1.2直接调用本类getObject方法的时候是能够获取缓存信息的
+ *   2.没有开启二级缓存的情况；没有开启二级缓存的时候，这个缓存是直接通过本类getObject来调用的，也就是不通过 TransactionalCache 这个
+ *   缓存入口过来就能直接拿到缓存数据；
  *   @author shenhufei
  *   @Date 2019年11月18日
  */

@@ -29,9 +29,7 @@ public class CacheLruDemo {
 	SqlSession session = sqlSessionFactory.openSession();
 	int i;
 	//实际测试，在xml文件没有开启二级缓存的时候，即使是循环中去查询，也是不走二级缓存的；
-	for(i =0; i<3; i++){
-		System.out.println("session的hashcode值"+session.hashCode());
-		System.out.println("session的地址值"+session);
+	for(i =0; i<10; i++){
 		User user = session.selectOne("org.apache.ibatis.Amy.UserMapper.selectUser",1L);
 		System.out.println(user);
 	}
@@ -39,3 +37,13 @@ public class CacheLruDemo {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
