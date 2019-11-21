@@ -3,6 +3,26 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
+<!-- 配置的标签的顺序必须是properties?,settings?,typeAliases?,
+ typeHandlers?,objectFactory?,objectWrapperFactory?,reflectorFactory?,plugins?,environments?,
+ databaseIdProvider?,mappers ，否则就会有异常抛出 -->
+  <!-- 加一个settings的配置 测试一下对settings节点的解析；settings标签和configuration标签是平级的-->
+<settings>
+  <setting name="cacheEnabled" value="true"/>
+</settings>
+
+<typeAliases>
+  <typeAlias alias="user" type="org.apache.ibatis.Amy.User"/>
+</typeAliases>
+
+<!-- 配置自定义的插件 -->
+<plugins>
+  <plugin interceptor="org.apache.ibatis.Amy.plugin.ExamplePlugin">
+    <property name="someProperty" value="100"/>
+  </plugin>
+</plugins>
+
   <environments default="development">
     <environment id="development">
       <transactionManager type="JDBC"/>
@@ -17,4 +37,5 @@
   <mappers>
     <mapper resource="org/apache/ibatis/Amy/UserMapper.xml"/>
   </mappers>
+
 </configuration>

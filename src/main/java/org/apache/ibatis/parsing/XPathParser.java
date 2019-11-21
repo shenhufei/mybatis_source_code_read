@@ -216,11 +216,25 @@ public class XPathParser {
     return xnodes;
   }
 
-  public XNode evalNode(String expression) {
+  /**
+   * 根据 节点名称的字符串 去Document对象中拿到响应的节点的所有数据，下面的方法都是对Document 中Node的解析和获取；
+ * @date 2019年11月21日 
+ * @param 
+ * @return
+ * @author shenhufei
+ */
+public XNode evalNode(String expression) {
     return evalNode(document, expression);
   }
 
-  public XNode evalNode(Object root, String expression) {
+  /**
+   * 
+ * @date 2019年11月21日 
+ * @param   Object root  父节点一般都是一个Node对象，根据父节点中子节点字符串名称后去子节点Node
+ * @return
+ * @author shenhufei
+ */
+public XNode evalNode(Object root, String expression) {
     Node node = (Node) evaluate(expression, root, XPathConstants.NODE);
     if (node == null) {
       return null;

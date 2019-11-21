@@ -20,6 +20,12 @@ import java.sql.Connection;
 /**
  * @author Clinton Begin
  */
+/**  
+ * @Description:  事物等级枚举值  
+ * @author shenhufei
+ * @date 2019年11月21日  
+ * @version 1.0  
+ */
 public enum TransactionIsolationLevel {
   NONE(Connection.TRANSACTION_NONE),
   READ_COMMITTED(Connection.TRANSACTION_READ_COMMITTED),

@@ -306,7 +306,14 @@ public List<XNode> evalNodes(String expression) {
     return children;
   }
 
-  public Properties getChildrenAsProperties() {
+  /**
+   * 拿到settings标签的中的 name属性已经name属性对应的值先存储起来
+ * @date 2019年11月21日 
+ * @param 
+ * @return
+ * @author shenhufei
+ */
+public Properties getChildrenAsProperties() {
     Properties properties = new Properties();
     for (XNode child : getChildren()) {
       String name = child.getStringAttribute("name");

@@ -108,15 +108,15 @@ public class XMLConfigBuilder extends BaseBuilder {
     // 特别说明：1. XNode  节点对象是mybatis 自定义的对象， XNode对象中包含了 Node 节点对象 ，也包含了 XPathParser 对象
     //1. Document 也是Node节点对象的一个子类，
     //从之前存储xml对应的字节流转换成了 XPathParser 对象中 Document 字段中
-    //这里也就是XPathParser对象中拿到 Document 字段（对象）再通过 configuration 字符串
-    //拿到 Document 对象中存储的  configuration 节点对象,  configuration 节点是所有配置文件总的父节点，所以解析
+    // 调用XPathParser类（包好了Document对象，在之前对xml的解析中转成了Document对象）evalNode根据 configuration 字符串获取到
+    // Document 对象中存储的  configuration 节点锁包含的所有数据, 说明configuration 节点是所有配置文件总的父节点，所以解析
     // configuration  就是解析整个配置文件/解析全局的配置文件；
     parseConfiguration(parser.evalNode("/configuration"));
     return configuration;
   }
 
 /**
- * 解析全局的配置文件
+ * 解析全局的配置文件 XNode root 这个对象就是Document 对象
  * @date 2019年10月28日 
  * @param 
  * @return
@@ -124,11 +124,11 @@ public class XMLConfigBuilder extends BaseBuilder {
  */
 private void parseConfiguration(XNode root) {
     try {
-      //issue #117 read properties first
-    	// System.out.print("XNode对象的数据是："+JSONArray.toJSONString(root));
+      //解析config.xml配置文件中configuration最大父节点中的configuration节点数据
       propertiesElement(root.evalNode("properties"));
-      //解析settings 设置
+      //解析和configuration节点平级的节点
       Properties settings = settingsAsProperties(root.evalNode("settings"));
+      //加载VFS对象的数据
       loadCustomVfs(settings);
       loadCustomLogImpl(settings);
       typeAliasesElement(root.evalNode("typeAliases"));
@@ -162,7 +162,15 @@ private void parseConfiguration(XNode root) {
     return props;
   }
 
-  private void loadCustomVfs(Properties props) throws ClassNotFoundException {
+  /**
+   * settings中可以自定VFS（文件传输）的实现类	
+   * 配置中自定义 的实现的类全限定名，以逗号分隔。
+ * @date 2019年11月21日 
+ * @param 
+ * @return
+ * @author shenhufei
+ */
+private void loadCustomVfs(Properties props) throws ClassNotFoundException {
     String value = props.getProperty("vfsImpl");
     if (value != null) {
       String[] clazzes = value.split(",");
@@ -170,6 +178,7 @@ private void parseConfiguration(XNode root) {
         if (!clazz.isEmpty()) {
           @SuppressWarnings("unchecked")
           Class<? extends VFS> vfsImpl = (Class<? extends VFS>)Resources.classForName(clazz);
+          //在配置文件江vfs的实现类赋值给Configuration中对应的字段
           configuration.setVfsImpl(vfsImpl);
         }
       }
@@ -300,7 +309,7 @@ private void settingsElement(Properties props) {
   }
 
   /**
- *   @Desc
+ *   @Desc 拿到 environments标签对应的Node
  *   @author shenhufei
  *   @Date 2019年10月28日
  */
