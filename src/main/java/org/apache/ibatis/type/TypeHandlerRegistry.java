@@ -51,6 +51,12 @@ import org.apache.ibatis.io.Resources;
  * @author Clinton Begin
  * @author Kazuki Shimizu
  */
+/**
+ *   @Desc  注册 Java类和MySQL 之间的数据转换的工具方法类
+ *   Java数据类型转MySQL数据类型；MySQL数据类型转Java数据类型
+ *   @author shenhufei
+ *   @Date 2019年11月23日
+ */
 public final class TypeHandlerRegistry {
 
   private final Map<JdbcType, TypeHandler<?>>  jdbcTypeHandlerMap = new EnumMap<>(JdbcType.class);

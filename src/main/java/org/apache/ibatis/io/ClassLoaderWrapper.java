@@ -23,12 +23,23 @@ import java.net.URL;
  *
  * @author Clinton Begin
  */
+/**
+ *   @Desc  ClassLoader 的包装类，将所有可能的需要用到的类加载初始化放在该类中
+ *   为啥使用包装类，因为框架需要加载的文件很多，类型也有很多，有普通的java,还有xml文件，还有properties文件都是需要加载的
+ *   @author shenhufei
+ *   @Date 2019年11月23日
+ */
 public class ClassLoaderWrapper {
 
   ClassLoader defaultClassLoader;
   ClassLoader systemClassLoader;
 
-  ClassLoaderWrapper() {
+  /**
+ *   @Desc 获取系统类加载器
+ *   @author shenhufei
+ *   @Date 2019年11月23日
+ */
+ClassLoaderWrapper() {
     try {
       systemClassLoader = ClassLoader.getSystemClassLoader();
     } catch (SecurityException ignored) {
@@ -102,7 +113,7 @@ public class ClassLoaderWrapper {
   }
 
   /**
-   * 从拿到的类加载器中拿到一个可以使用的类加载器
+   * 从拿到的类加载器中拿到一个可以使用的类加载器 ；返回的ClassLoader[] 数组中全都是 AppClassLoader 加载器对象；前两个都是空对象，后面三个不为空
    *
    * @param resource    - the resource to get
    * @param classLoader - the classloaders to examine
@@ -112,7 +123,7 @@ public class ClassLoaderWrapper {
     for (ClassLoader cl : classLoader) {
       if (null != cl) {
 
-        // try to find the resource as passed
+        // 将相应路径的 XML文件转成 BufferedInputStream io流中的输入对象
         InputStream returnValue = cl.getResourceAsStream(resource);
 
         // now, some class loaders want this leading "/", so we'll add it and try again if we didn't find the resource
@@ -201,18 +212,18 @@ public class ClassLoaderWrapper {
 
   }
 /**
- *  应该只返回固定的三种类加载器，
- *  这里返回去的 有五个类加载器对象
+ *  
+ *  返回五种类型的类加载器，但是这个五种类型的类加载器会重复
  * @param classLoader
  * @return
  */
   ClassLoader[] getClassLoaders(ClassLoader classLoader) {
     return new ClassLoader[]{
-        classLoader,
-        defaultClassLoader,
-        Thread.currentThread().getContextClassLoader(),
-        getClass().getClassLoader(),
-        systemClassLoader};
+        classLoader, // 参数指定的类加载器
+        defaultClassLoader,  //系统指定的默认加载器
+        Thread.currentThread().getContextClassLoader(), // 获取当前线程的类加载器
+        getClass().getClassLoader(),    // 获取字节码对象的类加载器
+        systemClassLoader}; // 获取系统的类加载
   }
 
 }

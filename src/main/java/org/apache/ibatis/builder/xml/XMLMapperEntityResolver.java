@@ -30,6 +30,11 @@ import org.xml.sax.SAXException;
  * @author Clinton Begin
  * @author Eduardo Macarron
  */
+/**
+ *   @Desc 加载DTD 约束文件，就是不能让开发者在XML配置文件中随便书写标签；
+ *   @author shenhufei
+ *   @Date 2019年11月23日
+ */
 public class XMLMapperEntityResolver implements EntityResolver {
 
   private static final String IBATIS_CONFIG_SYSTEM = "ibatis-3-config.dtd";

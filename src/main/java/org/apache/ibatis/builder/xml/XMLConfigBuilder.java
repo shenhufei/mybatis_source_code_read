@@ -80,15 +80,21 @@ public class XMLConfigBuilder extends BaseBuilder {
     this(inputStream, environment, null);
   }
 
-  public XMLConfigBuilder(InputStream inputStream, String environment, Properties props) {
+  /**
+ *   @Desc 调用本类的其他构造方法，进行初始化一些环境的操作
+ *   @author shenhufei
+ *   @Date 2019年11月23日
+ */
+public XMLConfigBuilder(InputStream inputStream, String environment, Properties props) {
 	  //XPathParser 中的 Document document字段存储了xml的所有数据
     this(new XPathParser(inputStream, true, props, new XMLMapperEntityResolver()), environment, props);
   }
   /*
-   * 拿到XPathParser 这个对象，对这个类种的字段进行赋值操作
+   * 拿到XPathParser 这个对象，对这个类中的字段进行赋值操作
    * 
    */
   private XMLConfigBuilder(XPathParser parser, String environment, Properties props) {
+	  // new Configuration() 这个构造方法，是去初始化了一些比较固定化的配置，这些配置不在XML中；
     super(new Configuration());
     ErrorContext.instance().resource("SQL Mapper Configuration");
     this.configuration.setVariables(props);

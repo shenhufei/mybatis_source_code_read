@@ -196,7 +196,7 @@ public Configuration(Environment environment) {
   }
 
   /**
- *   @Desc <set> 标签中的属性，
+ *   @Desc  除了注册Java数据类型还注册 XML配置中配置对应mybatis源码中的实体类（也就是<set> 标签中的属性）
  *   @author shenhufei
  *   @Date 2019年11月13日
  */

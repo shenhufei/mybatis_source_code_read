@@ -96,7 +96,12 @@ public class Resources {
    * @return The resource
    * @throws java.io.IOException If the resource cannot be found or read
    */
-  public static InputStream getResourceAsStream(String resource) throws IOException {
+  /**
+ *   @Desc 拿到配置文件 mybatis-config.xml文件的字符流对象；
+ *   @author shenhufei
+ *   @Date 2019年11月23日
+ */
+public static InputStream getResourceAsStream(String resource) throws IOException {
     return getResourceAsStream(null, resource);
   }
 
@@ -108,7 +113,12 @@ public class Resources {
    * @return The resource
    * @throws java.io.IOException If the resource cannot be found or read
    */
-  public static InputStream getResourceAsStream(ClassLoader loader, String resource) throws IOException {
+  /**
+ *   @Desc 把xml路径和 类加载器对象传入，让类加载器将XML文件转换成 io流 中的字符流对象
+ *   @author shenhufei
+ *   @Date 2019年11月23日
+ */
+public static InputStream getResourceAsStream(ClassLoader loader, String resource) throws IOException {
     InputStream in = classLoaderWrapper.getResourceAsStream(resource, loader);
     if (in == null) {
       throw new IOException("Could not find resource " + resource);

@@ -250,7 +250,12 @@ public XNode evalNode(Object root, String expression) {
     }
   }
 
-  private Document createDocument(InputSource inputSource) {
+  /**
+ *   @Desc 通过mybatis-config.xml文件对应的字符流对象转成  Document 对象
+ *   @author shenhufei
+ *   @Date 2019年11月23日
+ */
+private Document createDocument(InputSource inputSource) {
     // important: this must only be called AFTER common constructor
     try {
     	//jdk中的建造者模式，通过DocumentBuilderFactory对象创建DocumentBuilder 对象
@@ -262,7 +267,7 @@ public XNode evalNode(Object root, String expression) {
       factory.setIgnoringElementContentWhitespace(false);
       factory.setCoalescing(false);
       factory.setExpandEntityReferences(true);
-      //拿到 jdk源码中的DocumentBuilder 对象
+      //拿到Document(jdk源码中)对应的DocumentBuilder建造者对象 //
       DocumentBuilder builder = factory.newDocumentBuilder();
       builder.setEntityResolver(entityResolver);
       //下面做各种数据校验

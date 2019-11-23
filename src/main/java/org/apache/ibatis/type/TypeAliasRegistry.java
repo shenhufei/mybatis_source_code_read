@@ -152,7 +152,14 @@ public TypeAliasRegistry() {
     registerAlias(alias, type);
   }
 
-  public void registerAlias(String alias, Class<?> value) {
+  /**
+ *   @Desc 注解  数据类型字符串串对应的 java 实体类；
+ *   eg: 比如数字类型的 int  字符串就是“int” ,对应的Java实体类就是Java.lang.String 把Java中出现的所有的可能的都在
+ *   Java数据类型注册类种进行注册；
+ *   @author shenhufei
+ *   @Date 2019年11月23日
+ */
+public void registerAlias(String alias, Class<?> value) {
     if (alias == null) {
       throw new TypeException("The parameter alias cannot be null");
     }
