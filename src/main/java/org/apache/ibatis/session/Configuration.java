@@ -602,8 +602,14 @@ public void addLoadedResource(String resource) {
     return MetaObject.forObject(object, objectFactory, objectWrapperFactory, reflectorFactory);
   }
 
-  public ParameterHandler newParameterHandler(MappedStatement mappedStatement, Object parameterObject, BoundSql boundSql) {
+  /**
+ *   @Desc
+ *   @author shenhufei
+ *   @Date 2019年11月25日
+ */
+public ParameterHandler newParameterHandler(MappedStatement mappedStatement, Object parameterObject, BoundSql boundSql) {
     ParameterHandler parameterHandler = mappedStatement.getLang().createParameterHandler(mappedStatement, parameterObject, boundSql);
+    //这也是需要看 ParameterHandler 对象有没有做代理，做了代理也就意味着有至少有一个相关的自定义插件在这个位置上；
     parameterHandler = (ParameterHandler) interceptorChain.pluginAll(parameterHandler);
     return parameterHandler;
   }
@@ -611,12 +617,19 @@ public void addLoadedResource(String resource) {
   public ResultSetHandler newResultSetHandler(Executor executor, MappedStatement mappedStatement, RowBounds rowBounds, ParameterHandler parameterHandler,
       ResultHandler resultHandler, BoundSql boundSql) {
     ResultSetHandler resultSetHandler = new DefaultResultSetHandler(executor, mappedStatement, parameterHandler, resultHandler, boundSql, rowBounds);
+    // 结果集的处理也是需要看结果集这个对象有没有对应的自定义的插件；
     resultSetHandler = (ResultSetHandler) interceptorChain.pluginAll(resultSetHandler);
     return resultSetHandler;
   }
 
-  public StatementHandler newStatementHandler(Executor executor, MappedStatement mappedStatement, Object parameterObject, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) {
+  /**
+ *   @Desc  获取 数据处理类的父类（入参处理类（参数处理类），回参处理类（结果集处理了））
+ *   @author shenhufei
+ *   @Date 2019年11月25日
+ */
+public StatementHandler newStatementHandler(Executor executor, MappedStatement mappedStatement, Object parameterObject, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) {
     StatementHandler statementHandler = new RoutingStatementHandler(executor, mappedStatement, parameterObject, rowBounds, resultHandler, boundSql);
+    //这里还需要判断，也就是 数据处理类的父类，也可能是被自定义插件做代理；
     statementHandler = (StatementHandler) interceptorChain.pluginAll(statementHandler);
     return statementHandler;
   }
@@ -637,8 +650,15 @@ public void addLoadedResource(String resource) {
       executor = new SimpleExecutor(this, transaction);
     }
     if (cacheEnabled) {
+    	
       executor = new CachingExecutor(executor);
     }
+    //1.关于这段代码为啥要执行，只能说是上一步的代码需要构建 SQL执行之前的DefaultSqlSession 对象的，
+    // 这段的执行就是为了构建 DefaultSqlSession 对象中的 Executor对象，构建DefaultSqlSession 的时候不用太关心Executor 是代理对象，
+    //还是原生对象；
+    
+    //2.当还没有走过下面这段代码的时候，executor 一定是一个原生对象，当走过下段代码的时候executor对象就有可能是代理对象；
+    //是否是代理对象，取决于是否自定义了插件对象；
     executor = (Executor) interceptorChain.pluginAll(executor);
     return executor;
   }
