@@ -39,7 +39,12 @@ public class RoutingStatementHandler implements StatementHandler {
  */
 private final StatementHandler delegate;
 
-  public RoutingStatementHandler(Executor executor, MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) {
+  /**
+ *   @Desc  最重要的是去初始化 ParameterHandler 参数处理类 ResultSetHandler 结果集处理类  这两个对象
+ *   @author shenhufei
+ *   @Date 2019年11月25日
+ */
+public RoutingStatementHandler(Executor executor, MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) {
 
     switch (ms.getStatementType()) {
       case STATEMENT:

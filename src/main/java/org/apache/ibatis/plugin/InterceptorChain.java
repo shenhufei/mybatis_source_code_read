@@ -24,9 +24,18 @@ import java.util.List;
  */
 public class InterceptorChain {
 
-  private final List<Interceptor> interceptors = new ArrayList<>();
+  /**
+ *  初始化的时候，已经加载了所有自定义插件对象
+ */
+private final List<Interceptor> interceptors = new ArrayList<>();
 
-  public Object pluginAll(Object target) {
+  /**
+ *   @Desc 没有自定义插件的时候，返回去的对象就是原对象，如果有自定义插件的时候，那么这里的对象就是一个代理对象；
+ *   比如说：入参是CachingExecutor,如果有自定义插件，那么这里就应该返回的是 CachingExecutor的代理对象
+ *   @author shenhufei
+ *   @Date 2019年11月25日
+ */
+public Object pluginAll(Object target) {
     for (Interceptor interceptor : interceptors) {
       target = interceptor.plugin(target);
     }
