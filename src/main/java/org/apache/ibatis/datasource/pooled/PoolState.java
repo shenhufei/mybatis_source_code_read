@@ -21,6 +21,13 @@ import java.util.List;
 /**
  * @author Clinton Begin
  */
+/**  
+ * @Description:  连接池转台参数；在连接池初始化的时候，各种状态参数都是为0，
+ *  但是随着框架的运行，这些参数都会被动态赋值
+ * @author shenhufei
+ * @date 2019年11月28日  
+ * @version 1.0  
+ */
 public class PoolState {
 
   protected PooledDataSource dataSource;

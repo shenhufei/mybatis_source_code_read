@@ -36,7 +36,7 @@ import org.apache.ibatis.session.SqlSession;
 public class MapperRegistry {
 
   private final Configuration config;
-  //接口字节码和代理工厂对象
+  //mapper接口字节码对象和他想对应的MapperProxyFactory代理工厂对象 存储在map集合中
   private final Map<Class<?>, MapperProxyFactory<?>> knownMappers = new HashMap<>();
 
   public MapperRegistry(Configuration config) {
@@ -71,6 +71,7 @@ public class MapperRegistry {
         // It's important that the type is added before the parser is run
         // otherwise the binding may automatically be attempted by the
         // mapper parser. If the type is already known, it won't try.
+        //解析注解开发的接口，
         MapperAnnotationBuilder parser = new MapperAnnotationBuilder(config, type);
         parser.parse();
         loadCompleted = true;

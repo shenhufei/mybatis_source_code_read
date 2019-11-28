@@ -20,6 +20,7 @@ import java.io.Reader;
 import java.util.Properties;
 import javax.sql.DataSource;
 
+import org.apache.ibatis.binding.MapperRegistry;
 import org.apache.ibatis.builder.BaseBuilder;
 import org.apache.ibatis.builder.BuilderException;
 import org.apache.ibatis.datasource.DataSourceFactory;
@@ -33,6 +34,7 @@ import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.parsing.XNode;
 import org.apache.ibatis.parsing.XPathParser;
 import org.apache.ibatis.plugin.Interceptor;
+import org.apache.ibatis.plugin.InterceptorChain;
 import org.apache.ibatis.reflection.DefaultReflectorFactory;
 import org.apache.ibatis.reflection.MetaClass;
 import org.apache.ibatis.reflection.ReflectorFactory;
@@ -45,6 +47,8 @@ import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.LocalCacheScope;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.type.JdbcType;
+import org.apache.ibatis.type.TypeAliasRegistry;
+import org.apache.ibatis.type.TypeHandlerRegistry;
 import org.w3c.dom.Document;
 
 import com.alibaba.fastjson.JSONArray;
@@ -95,6 +99,9 @@ public XMLConfigBuilder(InputStream inputStream, String environment, Properties 
    */
   private XMLConfigBuilder(XPathParser parser, String environment, Properties props) {
 	  // new Configuration() 这个构造方法，是去初始化了一些比较固定化的配置，这些配置不在XML中；
+	  // MapperRegistry dao层接口对象注册 InterceptorChain 注册  TypeHandlerRegistry 数据类型（sql转java，java转sql）
+	  // TypeAliasRegistry 别名注册
+	 
     super(new Configuration());
     ErrorContext.instance().resource("SQL Mapper Configuration");
     this.configuration.setVariables(props);
@@ -388,7 +395,7 @@ private void environmentsElement(XNode context) throws Exception {
   }
 
   /**
- *   @Desc  数据源工厂对象
+ *   @Desc  拿到 数据源工厂对象DataSourceFactory 以及将DataSourceFactory 中数据赋值给 元数据对象
  *   @author shenhufei
  *   @Date 2019年10月28日
  */
