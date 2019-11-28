@@ -50,7 +50,7 @@ public class PooledDataSource implements DataSource {
 
   private final UnpooledDataSource dataSource;
 
-  // OPTIONAL CONFIGURATION FIELDS
+  //连接池各种基本参数，这里都是默认的参数值，
   protected int poolMaximumActiveConnections = 10;
   protected int poolMaximumIdleConnections = 5;
   protected int poolMaximumCheckoutTime = 20000;

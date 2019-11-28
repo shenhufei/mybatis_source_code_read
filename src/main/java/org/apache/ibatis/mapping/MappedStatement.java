@@ -66,7 +66,13 @@ public final class MappedStatement {
     // constructor disabled
   }
 
-  public static class Builder {
+  /**  
+ * @Description:   MappedStatement 的MappedStatementBulider对象，这里都是用的建造者模式拿到需要的对象
+ * @author shenhufei
+ * @date 2019年11月28日  
+ * @version 1.0  
+ */
+public static class Builder {
     private MappedStatement mappedStatement = new MappedStatement();
 
     public Builder(Configuration configuration, String id, SqlSource sqlSource, SqlCommandType sqlCommandType) {

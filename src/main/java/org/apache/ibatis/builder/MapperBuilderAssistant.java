@@ -294,6 +294,7 @@ public class MapperBuilderAssistant extends BaseBuilder {
     }
 
     MappedStatement statement = statementBuilder.build();
+    //添加mapper接口中每一个sql语句对应的MappedStatement 对象
     configuration.addMappedStatement(statement);
     return statement;
   }

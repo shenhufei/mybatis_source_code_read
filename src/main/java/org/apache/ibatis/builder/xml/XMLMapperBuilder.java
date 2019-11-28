@@ -90,7 +90,7 @@ public class XMLMapperBuilder extends BaseBuilder {
   }
 
   /**
- *   @Desc 解析xml文件中的想起数据
+ *   @Desc 解析普通mapper.xml文件中的节点数据
  *   @author shenhufei
  *   @Date 2019年11月4日
  */
@@ -101,7 +101,7 @@ public void parse() {
       configuration.addLoadedResource(resource);
       bindMapperForNamespace();
     }
-
+    //TODO 不明白下面三个方法的操作是啥。
     parsePendingResultMaps();
     parsePendingCacheRefs();
     parsePendingStatements();

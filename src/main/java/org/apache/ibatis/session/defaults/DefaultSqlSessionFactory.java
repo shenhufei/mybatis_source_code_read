@@ -107,6 +107,7 @@ private SqlSession openSessionFromDataSource(ExecutorType execType, TransactionI
       final TransactionFactory transactionFactory = getTransactionFactoryFromEnvironment(environment);
       //建造者模式，通过 TransactionFactory 事物工厂来创建事物对象
       //通过 事物工厂类 以及 环境对象 再去创建 事物对象，
+      // 这里的是否开启事物是由上层调用的方法来决定的；
       tx = transactionFactory.newTransaction(environment.getDataSource(), level, autoCommit);
       final Executor executor = configuration.newExecutor(tx, execType);
       return new DefaultSqlSession(configuration, executor, autoCommit);

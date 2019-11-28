@@ -38,7 +38,11 @@ public class UnpooledDataSourceFactory implements DataSourceFactory {
     this.dataSource = new UnpooledDataSource();
   }
 
-  @Override
+  /* 
+   * 从Properties对象中的，拿到数据源 的url，密码，账号  放入metaDataSource 元数据对象中
+   *
+   */
+@Override
   public void setProperties(Properties properties) {
     Properties driverProperties = new Properties();
     MetaObject metaDataSource = SystemMetaObject.forObject(dataSource);

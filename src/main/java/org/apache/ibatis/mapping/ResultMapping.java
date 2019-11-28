@@ -28,6 +28,12 @@ import org.apache.ibatis.type.TypeHandlerRegistry;
 /**
  * @author Clinton Begin
  */
+/**  
+ * @Description:  单个字段的结果映射相关配置信息；
+ * @author shenhufei
+ * @date 2019年11月28日  
+ * @version 1.0  
+ */
 public class ResultMapping {
 
   private Configuration configuration;
