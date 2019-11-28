@@ -25,6 +25,12 @@ import org.apache.ibatis.type.TypeHandlerRegistry;
 /**
  * @author Clinton Begin
  */
+/**  
+ * @Description:   参数映射类，每一个字段相关的配置信息配置，
+ * @author shenhufei
+ * @date 2019年11月28日  
+ * @version 1.0  
+ */
 public class ParameterMapping {
 
   private Configuration configuration;
