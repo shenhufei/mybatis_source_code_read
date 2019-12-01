@@ -20,12 +20,19 @@ import java.lang.reflect.Proxy;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.ibatis.Amy.MethodTest;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.defaults.DefaultSqlSession;
 
 /**
  * @author Lasse Voss
  * 
+ */
+/**
+ *   @Desc  初始化的时候，每一个mapper接口，都会生成一个对应的MapperProxyFactory mapper代理工厂类；
+ *   然后再存储这个接口中所有的方法中所有的方法，key 是Method ，value 是 MapperMethod
+ *   @author shenhufei
+ *   @Date 2019年12月1日
  */
 public class MapperProxyFactory<T> {
 	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
@@ -52,6 +59,7 @@ public class MapperProxyFactory<T> {
 
   public T newInstance(SqlSession sqlSession) {
     final MapperProxy<T> mapperProxy = new MapperProxy<>(sqlSession, mapperInterface, methodCache);
+    logger.error("methodCache集合中的数据是："+MethodTest.getSting(logger ));
     return newInstance(mapperProxy);
   }
 

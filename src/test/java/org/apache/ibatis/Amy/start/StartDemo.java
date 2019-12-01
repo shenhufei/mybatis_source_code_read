@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import org.apache.ibatis.Amy.User;
+import org.apache.ibatis.binding.MapperMethod;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;

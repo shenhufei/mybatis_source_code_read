@@ -18,6 +18,7 @@ package org.apache.ibatis.executor;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.ibatis.Amy.MethodTest;
 import org.apache.ibatis.cache.Cache;
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.cache.TransactionalCacheManager;
@@ -30,6 +31,7 @@ import org.apache.ibatis.mapping.StatementType;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 import org.apache.ibatis.transaction.Transaction;
 
 /**
@@ -37,6 +39,7 @@ import org.apache.ibatis.transaction.Transaction;
  * @author Eduardo Macarron
  */
 public class CachingExecutor implements Executor {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(CachingExecutor.class);
 
   private final Executor delegate;
   private final TransactionalCacheManager tcm = new TransactionalCacheManager();
@@ -80,6 +83,12 @@ public class CachingExecutor implements Executor {
   @Override
   public <E> List<E> query(MappedStatement ms, Object parameterObject, RowBounds rowBounds, ResultHandler resultHandler) throws SQLException {
     BoundSql boundSql = ms.getBoundSql(parameterObject);
+    //以   select * from user where id = ? 为例子
+    //参数是{"parameterMappings":[{"javaType":"java.lang.Long","mode":"IN","property":"id","typeHandler":{"rawType":"java.lang.Long"}}],
+    //"parameterObject":1,"sql":"select * from user where id = ?"}
+    //BoundSql存储的是每个参数的隐射关系，已经这个SQL 解析之后的长字符串
+
+    logger.error("BoundSql对象中的数据是："+MethodTest.getSting(boundSql));
     CacheKey key = createCacheKey(ms, parameterObject, rowBounds, boundSql);
     return query(ms, parameterObject, rowBounds, resultHandler, key, boundSql);
   }

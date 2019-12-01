@@ -34,6 +34,11 @@ import org.apache.ibatis.session.defaults.DefaultSqlSession;
  *  // 这个是启动时候需要注册的类，找到持久层对应包，加载其对应的持久层接口成SqlSession对象；
  *  // 这个类 对外提供类 SqlSession 对象的增加，获取功能，以及判断SqlSession 对象是否存在的功能；
  */
+/**
+ *   @Desc 这个类初始化的时候，存储所有的mapper接口对应的代理工厂类
+ *   @author shenhufei
+ *   @Date 2019年12月1日
+ */
 public class MapperRegistry {
 	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
 

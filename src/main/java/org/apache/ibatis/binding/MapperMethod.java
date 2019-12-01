@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.apache.ibatis.Amy.MethodTest;
 import org.apache.ibatis.annotations.Flush;
 import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.cursor.Cursor;
@@ -54,8 +55,11 @@ public class MapperMethod {
   private final MethodSignature method;
 
   public MapperMethod(Class<?> mapperInterface, Method method, Configuration config) {
+	  logger.error("method方法中的数据是："+method.getName());
     this.command = new SqlCommand(config, mapperInterface, method);
     this.method = new MethodSignature(config, mapperInterface, method);
+    logger.error("SqlCommand对象中的数据是："+MethodTest.getSting(command));
+    logger.error("MethodSignature对象中的数据是："+MethodTest.getSting(method));
   }
  // 具体就是做增删改查
   public Object execute(SqlSession sqlSession, Object[] args) {
@@ -221,7 +225,12 @@ public class MapperMethod {
 
   }
 
-  public static class SqlCommand {
+  /**
+ *   @Desc sql 语句对应的名称，SQL执行的类型
+ *   @author shenhufei
+ *   @Date 2019年12月1日
+ */
+public static class SqlCommand {
 
     private final String name;
     private final SqlCommandType type;
@@ -277,7 +286,12 @@ public class MapperMethod {
     }
   }
 
-  public static class MethodSignature {
+  /**
+ *   @Desc 每个方法结果集签名，
+ *   @author shenhufei
+ *   @Date 2019年12月1日
+ */
+public static class MethodSignature {
 
     private final boolean returnsMany;
     private final boolean returnsMap;
