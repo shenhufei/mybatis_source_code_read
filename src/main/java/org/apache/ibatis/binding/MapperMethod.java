@@ -37,6 +37,7 @@ import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 
 /**
  * @author Clinton Begin
@@ -46,6 +47,8 @@ import org.apache.ibatis.session.SqlSession;
  * 此类就是做增删改查的最上层的类；
  */
 public class MapperMethod {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
+
 
   private final SqlCommand command;
   private final MethodSignature method;

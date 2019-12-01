@@ -32,11 +32,13 @@ import org.apache.ibatis.mapping.StatementType;
 import org.apache.ibatis.parsing.XNode;
 import org.apache.ibatis.scripting.LanguageDriver;
 import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 
 /**
  * @author Clinton Begin
  */
 public class XMLStatementBuilder extends BaseBuilder {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
 
   private final MapperBuilderAssistant builderAssistant;
   private final XNode context;

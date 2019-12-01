@@ -18,6 +18,8 @@ package org.apache.ibatis.executor.statement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
+
 /**
  * Utility for {@link java.sql.Statement}.
  *
@@ -25,6 +27,7 @@ import java.sql.Statement;
  * @author Kazuki Shimizu
  */
 public class StatementUtil {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
 
   private StatementUtil() {
     // NOP

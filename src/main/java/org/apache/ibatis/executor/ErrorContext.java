@@ -15,10 +15,13 @@
  */
 package org.apache.ibatis.executor;
 
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
+
 /**
  * @author Clinton Begin
  */
 public class ErrorContext {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
 
   private static final String LINE_SEPARATOR = System.getProperty("line.separator","\n");
   private static final ThreadLocal<ErrorContext> LOCAL = new ThreadLocal<>();

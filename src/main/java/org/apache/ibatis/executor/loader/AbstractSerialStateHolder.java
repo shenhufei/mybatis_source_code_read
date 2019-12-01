@@ -34,12 +34,15 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.reflection.factory.ObjectFactory;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 
 /**
  * @author Eduardo Macarron
  * @author Franta Mejta
  */
 public abstract class AbstractSerialStateHolder implements Externalizable {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
+
 
   private static final long serialVersionUID = 8940388717901644661L;
   private static final ThreadLocal<ObjectOutputStream> stream = new ThreadLocal<>();

@@ -30,6 +30,7 @@ import javax.sql.DataSource;
 import org.apache.ibatis.datasource.unpooled.UnpooledDataSource;
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 
 /**
  * This is a simple, synchronous, thread-safe database connection pool.
@@ -43,6 +44,8 @@ import org.apache.ibatis.logging.LogFactory;
  *   @Date 2019年11月4日
  */
 public class PooledDataSource implements DataSource {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
+
 
   private static final Log log = LogFactory.getLog(PooledDataSource.class);
 

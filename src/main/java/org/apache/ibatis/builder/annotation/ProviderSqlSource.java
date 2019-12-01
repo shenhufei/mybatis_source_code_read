@@ -28,12 +28,14 @@ import org.apache.ibatis.mapping.SqlSource;
 import org.apache.ibatis.reflection.ParamNameResolver;
 import org.apache.ibatis.scripting.LanguageDriver;
 import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 
 /**
  * @author Clinton Begin
  * @author Kazuki Shimizu
  */
 public class ProviderSqlSource implements SqlSource {
+	 private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
 
   private final Configuration configuration;
   private final Class<?> providerType;

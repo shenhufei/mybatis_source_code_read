@@ -31,6 +31,11 @@ import org.apache.ibatis.session.Configuration;
 /**
  * @author Eduardo Macarron
  */
+/**
+ *   @Desc XML形式的，组装入参处理类
+ *   @author shenhufei
+ *   @Date 2019年12月1日
+ */
 public class XMLLanguageDriver implements LanguageDriver {
 
   @Override

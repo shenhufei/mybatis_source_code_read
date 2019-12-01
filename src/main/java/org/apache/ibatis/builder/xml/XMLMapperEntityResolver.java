@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.util.Locale;
 
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -36,6 +37,7 @@ import org.xml.sax.SAXException;
  *   @Date 2019年11月23日
  */
 public class XMLMapperEntityResolver implements EntityResolver {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
 
   private static final String IBATIS_CONFIG_SYSTEM = "ibatis-3-config.dtd";
   private static final String IBATIS_MAPPER_SYSTEM = "ibatis-3-mapper.dtd";

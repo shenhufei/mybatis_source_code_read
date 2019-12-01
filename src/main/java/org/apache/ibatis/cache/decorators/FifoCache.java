@@ -19,6 +19,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 import org.apache.ibatis.cache.Cache;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 
 /**
  * FIFO (first in, first out) cache decorator.
@@ -26,6 +27,7 @@ import org.apache.ibatis.cache.Cache;
  * @author Clinton Begin
  */
 public class FifoCache implements Cache {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
 
   private final Cache delegate;
   private final Deque<Object> keyList;

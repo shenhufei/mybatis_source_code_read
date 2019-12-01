@@ -16,11 +16,14 @@
 package org.apache.ibatis.builder;
 
 import org.apache.ibatis.cache.Cache;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 
 /**
  * @author Clinton Begin
  */
 public class CacheRefResolver {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
+
   private final MapperBuilderAssistant assistant;
   private final String cacheRefNamespace;
 

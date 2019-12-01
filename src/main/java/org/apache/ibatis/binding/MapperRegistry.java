@@ -25,6 +25,7 @@ import org.apache.ibatis.builder.annotation.MapperAnnotationBuilder;
 import org.apache.ibatis.io.ResolverUtil;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 
 /**
  * @author Clinton Begin
@@ -34,6 +35,8 @@ import org.apache.ibatis.session.SqlSession;
  *  // 这个类 对外提供类 SqlSession 对象的增加，获取功能，以及判断SqlSession 对象是否存在的功能；
  */
 public class MapperRegistry {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
+
 
   private final Configuration config;
   //mapper接口字节码对象和他想对应的MapperProxyFactory代理工厂对象 存储在map集合中

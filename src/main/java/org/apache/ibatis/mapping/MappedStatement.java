@@ -288,7 +288,12 @@ public static class Builder {
     return statementLog;
   }
 
-  public LanguageDriver getLang() {
+  /**
+ *   @Desc 获取 参数的配置的方式 是XML还是注解的配置方式； 或者说还可以自定的方法
+ *   @author shenhufei
+ *   @Date 2019年12月1日
+ */
+public LanguageDriver getLang() {
     return lang;
   }
 
@@ -304,7 +309,12 @@ public static class Builder {
     return resultSets;
   }
 
-  public BoundSql getBoundSql(Object parameterObject) {
+  /**
+ *   @Desc
+ *   @author shenhufei
+ *   @Date 2019年12月1日
+ */
+public BoundSql getBoundSql(Object parameterObject) {
     BoundSql boundSql = sqlSource.getBoundSql(parameterObject);
     
     List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();

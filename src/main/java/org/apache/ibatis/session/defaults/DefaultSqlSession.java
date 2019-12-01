@@ -51,6 +51,7 @@ import org.apache.ibatis.session.SqlSession;
  *   @Date 2019年11月16日
  */
 public class DefaultSqlSession implements SqlSession {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
 
   private final Configuration configuration;
   private final Executor executor;
@@ -149,6 +150,7 @@ public class DefaultSqlSession implements SqlSession {
   public <E> List<E> selectList(String statement, Object parameter, RowBounds rowBounds) {
     try {
       MappedStatement ms = configuration.getMappedStatement(statement);
+      logger.error(ms.toString());
       // 如果有自定义插件 刚好是对executor对象做了处理，那么这边的query 方法的调用，可能就是到代理对象Plugin对象中的方法了。
       return executor.query(ms, wrapCollection(parameter), rowBounds, Executor.NO_RESULT_HANDLER);
     } catch (Exception e) {
@@ -337,7 +339,7 @@ private boolean isCommitOrRollbackRequired(boolean force) {
     return (!autoCommit && dirty) || force;
   }
   
-  //组装语句对应的参数
+  //组装语句对应的参数 当参数是集合 的时候需要做特别的处理需要封装成map返回；
   private Object wrapCollection(final Object object) {
     if (object instanceof Collection) {
       StrictMap<Object> map = new StrictMap<>();

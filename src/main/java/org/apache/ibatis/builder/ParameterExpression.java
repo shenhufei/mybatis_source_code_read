@@ -17,6 +17,8 @@ package org.apache.ibatis.builder;
 
 import java.util.HashMap;
 
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
+
 /**
  * Inline parameter expression parser. Supported grammar (simplified):
  *
@@ -32,6 +34,7 @@ import java.util.HashMap;
  * @author Frank D. Martinez [mnesarco]
  */
 public class ParameterExpression extends HashMap<String, String> {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
 
   private static final long serialVersionUID = -2417552199605158680L;
 

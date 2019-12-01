@@ -19,11 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 
 /**
  * @author Jeff Butler
  */
 public class BatchResult {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
 
   private final MappedStatement mappedStatement;
   private final String sql;

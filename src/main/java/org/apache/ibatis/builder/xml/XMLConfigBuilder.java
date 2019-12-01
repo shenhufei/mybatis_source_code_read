@@ -45,6 +45,7 @@ import org.apache.ibatis.session.AutoMappingUnknownColumnBehavior;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.LocalCacheScope;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.TypeAliasRegistry;
@@ -58,6 +59,7 @@ import com.alibaba.fastjson.JSONArray;
  * @author Kazuki Shimizu
  */
 public class XMLConfigBuilder extends BaseBuilder {
+  private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
 
   private boolean parsed;
   private final XPathParser parser;

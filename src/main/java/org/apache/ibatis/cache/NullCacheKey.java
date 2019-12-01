@@ -15,10 +15,14 @@
  */
 package org.apache.ibatis.cache;
 
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
+
 /**
  * @author Clinton Begin
  */
 public final class NullCacheKey extends CacheKey {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
+
 
   private static final long serialVersionUID = 3704229911977019465L;
 

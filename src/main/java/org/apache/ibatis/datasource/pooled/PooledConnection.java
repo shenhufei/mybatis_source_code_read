@@ -22,6 +22,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import org.apache.ibatis.reflection.ExceptionUtil;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 
 /**
  * @author Clinton Begin
@@ -33,6 +34,8 @@ import org.apache.ibatis.reflection.ExceptionUtil;
  *   @Date 2019年11月4日
  */
 class PooledConnection implements InvocationHandler {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
+
 
   private static final String CLOSE = "close";
   private static final Class<?>[] IFACES = new Class<?>[] { Connection.class };

@@ -26,6 +26,7 @@ import org.apache.ibatis.builder.MapperBuilderAssistant;
 import org.apache.ibatis.parsing.PropertyParser;
 import org.apache.ibatis.parsing.XNode;
 import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -34,6 +35,7 @@ import org.w3c.dom.NodeList;
  * @author Frank D. Martinez [mnesarco]
  */
 public class XMLIncludeTransformer {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
 
   private final Configuration configuration;
   private final MapperBuilderAssistant builderAssistant;

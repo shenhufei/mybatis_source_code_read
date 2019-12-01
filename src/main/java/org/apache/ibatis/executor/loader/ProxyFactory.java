@@ -20,6 +20,7 @@ import java.util.Properties;
 
 import org.apache.ibatis.reflection.factory.ObjectFactory;
 import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 
 /**
  * @author Eduardo Macarron
@@ -30,6 +31,7 @@ import org.apache.ibatis.session.Configuration;
  *   @Date 2019年11月14日
  */
 public interface ProxyFactory {
+
 
   default void setProperties(Properties properties) {
     // NOP

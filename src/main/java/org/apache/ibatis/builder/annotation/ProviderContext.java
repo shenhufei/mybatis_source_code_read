@@ -17,6 +17,8 @@ package org.apache.ibatis.builder.annotation;
 
 import java.lang.reflect.Method;
 
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
+
 /**
  * The context object for sql provider method.
  *
@@ -24,6 +26,8 @@ import java.lang.reflect.Method;
  * @since 3.4.5
  */
 public final class ProviderContext {
+  private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
+
 
   private final Class<?> mapperType;
   private final Method mapperMethod;

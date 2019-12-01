@@ -16,6 +16,7 @@
 package org.apache.ibatis.datasource.pooled;
 
 import org.apache.ibatis.datasource.unpooled.UnpooledDataSourceFactory;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 
 /**
  * @author Clinton Begin
@@ -27,6 +28,8 @@ import org.apache.ibatis.datasource.unpooled.UnpooledDataSourceFactory;
  *   @Date 2019年11月4日
  */
 public class PooledDataSourceFactory extends UnpooledDataSourceFactory {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
+
 
   public PooledDataSourceFactory() {
     this.dataSource = new PooledDataSource();

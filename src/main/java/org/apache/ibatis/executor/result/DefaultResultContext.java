@@ -16,11 +16,13 @@
 package org.apache.ibatis.executor.result;
 
 import org.apache.ibatis.session.ResultContext;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 
 /**
  * @author Clinton Begin
  */
 public class DefaultResultContext<T> implements ResultContext<T> {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
 
   private T resultObject;
   private int resultCount;

@@ -17,10 +17,14 @@ package org.apache.ibatis.builder.annotation;
 
 import java.lang.reflect.Method;
 
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
+
 /**
  * @author Eduardo Macarron
  */
 public class MethodResolver {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
+
   private final MapperAnnotationBuilder annotationBuilder;
   private final Method method;
 

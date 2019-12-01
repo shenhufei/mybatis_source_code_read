@@ -19,11 +19,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.cache.decorators.TransactionalCache;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 
 /**
  * @author Clinton Begin
  */
 public class TransactionalCacheManager {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
+
 
   private final Map<Cache, TransactionalCache> transactionalCaches = new HashMap<>();
 

@@ -20,11 +20,14 @@ import java.util.List;
 import org.apache.ibatis.mapping.Discriminator;
 import org.apache.ibatis.mapping.ResultMap;
 import org.apache.ibatis.mapping.ResultMapping;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 
 /**
  * @author Eduardo Macarron
  */
 public class ResultMapResolver {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
+
   private final MapperBuilderAssistant assistant;
   private final String id;
   private final Class<?> type;

@@ -19,6 +19,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.ibatis.cache.Cache;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 
 /**
  * Lru (least recently used) cache decorator.
@@ -31,6 +32,7 @@ import org.apache.ibatis.cache.Cache;
  *   @Date 2019年11月19日
  */
 public class LruCache implements Cache {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
 
   private final Cache delegate;
   private Map<Object, Object> keyMap;

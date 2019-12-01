@@ -603,7 +603,7 @@ public void addLoadedResource(String resource) {
   }
 
   /**
- *   @Desc
+ *   @Desc 获取参数处理类对象
  *   @author shenhufei
  *   @Date 2019年11月25日
  */
@@ -614,7 +614,12 @@ public ParameterHandler newParameterHandler(MappedStatement mappedStatement, Obj
     return parameterHandler;
   }
 
-  public ResultSetHandler newResultSetHandler(Executor executor, MappedStatement mappedStatement, RowBounds rowBounds, ParameterHandler parameterHandler,
+  /**
+ *   @Desc获取结果集处理对象
+ *   @author shenhufei
+ *   @Date 2019年12月1日
+ */
+public ResultSetHandler newResultSetHandler(Executor executor, MappedStatement mappedStatement, RowBounds rowBounds, ParameterHandler parameterHandler,
       ResultHandler resultHandler, BoundSql boundSql) {
     ResultSetHandler resultSetHandler = new DefaultResultSetHandler(executor, mappedStatement, parameterHandler, resultHandler, boundSql, rowBounds);
     // 结果集的处理也是需要看结果集这个对象有没有对应的自定义的插件；
@@ -795,7 +800,14 @@ public StatementHandler newStatementHandler(Executor executor, MappedStatement m
     return this.getMappedStatement(id, true);
   }
 
-  public MappedStatement getMappedStatement(String id, boolean validateIncompleteStatements) {
+  /**
+ *   @Desc 因为每个方法都会有对应的 MappedStatement 
+ *   拿到具体的方法的全路径就能够拿到这个方法对应的MappedStatement  对象，
+ *   MappedStatement  这个对象，就会这个方法在xml配置中的各种执行的配置信息；
+ *   @author shenhufei
+ *   @Date 2019年12月1日
+ */
+public MappedStatement getMappedStatement(String id, boolean validateIncompleteStatements) {
     if (validateIncompleteStatements) {
       buildAllStatements();
     }

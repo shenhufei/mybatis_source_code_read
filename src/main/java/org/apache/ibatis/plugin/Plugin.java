@@ -63,7 +63,7 @@ public static Object wrap(Object target, Interceptor interceptor) {
   }
 
   /**
- *   @Desc 当有自定义插件对象的时候，这里invoke 方法才会被执行；
+ *   @Desc 当有自定义插件对象的时候，executor 对象做的crud  就会调用这里invoke方法，invoke方法才会被执行；
  *   @author shenhufei
  *   @Date 2019年11月25日
  */

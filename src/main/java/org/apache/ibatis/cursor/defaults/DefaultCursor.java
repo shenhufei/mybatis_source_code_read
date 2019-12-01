@@ -27,6 +27,7 @@ import org.apache.ibatis.mapping.ResultMap;
 import org.apache.ibatis.session.ResultContext;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 
 /**
  * This is the default implementation of a MyBatis Cursor.
@@ -35,6 +36,8 @@ import org.apache.ibatis.session.RowBounds;
  * @author Guillaume Darmont / guillaume@dropinocean.com
  */
 public class DefaultCursor<T> implements Cursor<T> {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
+
 
   // ResultSetHandler stuff
   private final DefaultResultSetHandler resultSetHandler;

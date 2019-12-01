@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.StringJoiner;
 
 import org.apache.ibatis.reflection.ArrayUtil;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 
 /**
  * @author Clinton Begin
@@ -31,6 +32,8 @@ import org.apache.ibatis.reflection.ArrayUtil;
  *   @Date 2019年11月14日
  */
 public class CacheKey implements Cloneable, Serializable {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
+
 
   private static final long serialVersionUID = 1146682552656046210L;
 

@@ -18,6 +18,8 @@ package org.apache.ibatis.datasource.pooled;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
+
 /**
  * @author Clinton Begin
  */
@@ -29,6 +31,8 @@ import java.util.List;
  * @version 1.0  
  */
 public class PoolState {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
+
 
   protected PooledDataSource dataSource;
 

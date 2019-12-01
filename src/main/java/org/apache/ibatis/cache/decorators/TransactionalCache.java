@@ -23,6 +23,7 @@ import java.util.Set;
 import org.apache.ibatis.cache.Cache;
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 
 /**
  * The 2nd level cache transactional buffer.
@@ -41,6 +42,8 @@ import org.apache.ibatis.logging.LogFactory;
  *   @Date 2019年11月19日
  */
 public class TransactionalCache implements Cache {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
+
 
   private static final Log log = LogFactory.getLog(TransactionalCache.class);
 

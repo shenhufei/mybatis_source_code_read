@@ -19,12 +19,15 @@ import java.sql.Statement;
 
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 
 /**
  * @author Clinton Begin
  * @author Kazuki Shimizu
  */
 public class NoKeyGenerator implements KeyGenerator {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
+
 
   /**
    * A shared instance.

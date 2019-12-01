@@ -29,6 +29,7 @@ import java.util.Set;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.mapping.ResultMap;
 import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.ObjectTypeHandler;
 import org.apache.ibatis.type.TypeHandler;
@@ -39,6 +40,7 @@ import org.apache.ibatis.type.UnknownTypeHandler;
  * @author Iwao AVE!
  */
 public class ResultSetWrapper {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
 
   private final ResultSet resultSet;
   private final TypeHandlerRegistry typeHandlerRegistry;

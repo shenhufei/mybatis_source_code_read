@@ -100,7 +100,12 @@ class LanguageDriverRegistryTest {
     assertThat(registry.getDefaultDriver()).isInstanceOf(RawLanguageDriver.class);
   }
 
-  static private class PrivateLanguageDriver implements LanguageDriver {
+  /**
+ *   @Desc 除了 XML，注解配置之外的自定义的配置；
+ *   @author shenhufei
+ *   @Date 2019年12月1日
+ */
+static private class PrivateLanguageDriver implements LanguageDriver {
 
     @Override
     public ParameterHandler createParameterHandler(MappedStatement mappedStatement, Object parameterObject, BoundSql boundSql) {

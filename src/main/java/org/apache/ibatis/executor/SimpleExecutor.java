@@ -73,7 +73,7 @@ public class SimpleExecutor extends BaseExecutor {
     Statement stmt = null;
     try {
       Configuration configuration = ms.getConfiguration();
-      //说明，参数处理类对象的初始化是在SQL 执行的时候
+      //说明，参数处理类对象的初始化是在SQL 执行的时候（入参处理对象，回参处理对象）
       StatementHandler handler = configuration.newStatementHandler(wrapper, ms, parameter, rowBounds, resultHandler, boundSql);
       stmt = prepareStatement(handler, ms.getStatementLog());
       return handler.query(stmt, resultHandler);
