@@ -15,10 +15,16 @@
  */
 package org.apache.ibatis.parsing;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @author Clinton Begin
  */
 public class GenericTokenParser {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   private final String openToken;
   private final String closeToken;

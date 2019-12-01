@@ -31,11 +31,15 @@ import java.util.Set;
 
 import org.apache.ibatis.io.ResolverUtil;
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 
 /**
  * @author Clinton Begin
  */
 public class TypeAliasRegistry {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   private final Map<String, Class<?>> typeAliases = new HashMap<>();
 

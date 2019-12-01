@@ -17,12 +17,17 @@ package org.apache.ibatis.reflection.property;
 
 import java.util.Locale;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.reflection.ReflectionException;
 
 /**
  * @author Clinton Begin
  */
 public final class PropertyNamer {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   private PropertyNamer() {
     // Prevent Instantiation of Static Class

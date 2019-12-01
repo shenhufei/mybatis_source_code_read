@@ -16,11 +16,16 @@
 package org.apache.ibatis.scripting;
 
 import org.apache.ibatis.exceptions.PersistenceException;
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 
 /**
  * @author Frank D. Martinez [mnesarco]
  */
 public class ScriptingException extends PersistenceException {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   private static final long serialVersionUID = 7642570221267566591L;
 

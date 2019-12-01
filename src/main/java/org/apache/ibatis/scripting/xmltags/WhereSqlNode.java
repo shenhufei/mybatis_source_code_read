@@ -18,12 +18,17 @@ package org.apache.ibatis.scripting.xmltags;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.session.Configuration;
 
 /**
  * @author Clinton Begin
  */
 public class WhereSqlNode extends TrimSqlNode {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   private static List<String> prefixList = Arrays.asList("AND ","OR ","AND\n", "OR\n", "AND\r", "OR\r", "AND\t", "OR\t");
 

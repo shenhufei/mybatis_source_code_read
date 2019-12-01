@@ -17,11 +17,16 @@ package org.apache.ibatis.reflection;
 
 import java.util.Optional;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @deprecated Since 3.5.0, Will remove this class at future(next major version up).
  */
 @Deprecated
 public abstract class OptionalUtil {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   public static Object ofNullable(Object value) {
     return Optional.ofNullable(value);

@@ -18,6 +18,10 @@ package org.apache.ibatis.type;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * References a generic type.
  *
@@ -26,6 +30,7 @@ import java.lang.reflect.Type;
  * @author Simone Tripodi
  */
 public abstract class TypeReference<T> {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   private final Type rawType;
 

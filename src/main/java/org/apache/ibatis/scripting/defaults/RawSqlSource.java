@@ -18,6 +18,9 @@ package org.apache.ibatis.scripting.defaults;
 import java.util.HashMap;
 
 import org.apache.ibatis.builder.SqlSourceBuilder;
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.SqlSource;
 import org.apache.ibatis.scripting.xmltags.DynamicContext;
@@ -33,6 +36,7 @@ import org.apache.ibatis.session.Configuration;
  * @author Eduardo Macarron
  */
 public class RawSqlSource implements SqlSource {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   private final SqlSource sqlSource;
 

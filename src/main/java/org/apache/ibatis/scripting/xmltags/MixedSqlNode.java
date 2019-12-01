@@ -17,10 +17,16 @@ package org.apache.ibatis.scripting.xmltags;
 
 import java.util.List;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @author Clinton Begin
  */
 public class MixedSqlNode implements SqlNode {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
   private final List<SqlNode> contents;
 
   public MixedSqlNode(List<SqlNode> contents) {

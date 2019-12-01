@@ -15,12 +15,17 @@
  */
 package org.apache.ibatis.jdbc;
 
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @deprecated Use the {@link SQL} Class
  *
  * @author Jeff Butler
  */
 public class SqlBuilder {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   private static final ThreadLocal<SQL> localSQL = new ThreadLocal<>();
 

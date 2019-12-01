@@ -20,6 +20,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.ibatis.io.DefaultVFS;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @author Clinton Begin
  * @author Jeff Butler
@@ -27,6 +31,8 @@ import java.util.List;
  * @author Kazuki Shimizu
  */
 public abstract class AbstractSQL<T> {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   private static final String AND = ") \nAND (";
   private static final String OR = ") \nOR (";

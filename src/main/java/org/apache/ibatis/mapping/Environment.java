@@ -17,12 +17,17 @@ package org.apache.ibatis.mapping;
 
 import javax.sql.DataSource;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.transaction.TransactionFactory;
 
 /**
  * @author Clinton Begin
  */
 public final class Environment {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
   private final String id;
   private final TransactionFactory transactionFactory;
   private final DataSource dataSource;

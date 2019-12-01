@@ -20,10 +20,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @author Clinton Begin
  */
 public class LongTypeHandler extends BaseTypeHandler<Long> {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 	/**
 	 *   @Desc 将java对象的数据类型转换成数据库对象的数据类型
 	 *   @author shenhufei

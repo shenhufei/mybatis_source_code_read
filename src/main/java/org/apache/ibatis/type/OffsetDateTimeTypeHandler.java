@@ -21,11 +21,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.OffsetDateTime;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @since 3.4.5
  * @author Tomas Rohovsky
  */
 public class OffsetDateTimeTypeHandler extends BaseTypeHandler<OffsetDateTime> {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   @Override
   public void setNonNullParameter(PreparedStatement ps, int i, OffsetDateTime parameter, JdbcType jdbcType)

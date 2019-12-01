@@ -26,6 +26,7 @@ import java.util.Set;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.builder.BuilderException;
+import org.apache.ibatis.jdbc.AbstractSQL;
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.reflection.ParamNameUtil;
@@ -35,6 +36,8 @@ import org.apache.ibatis.session.Configuration;
  * @author Clinton Begin
  */
 public class ResultMap {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
   private Configuration configuration;
 
   private String id;

@@ -33,10 +33,15 @@ import java.time.OffsetTime;
 import java.util.Calendar;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @author Clinton Begin
  */
 public class ArrayTypeHandler extends BaseTypeHandler<Object> {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   private static final ConcurrentHashMap<Class<?>, String> STANDARD_MAPPING;
   static {

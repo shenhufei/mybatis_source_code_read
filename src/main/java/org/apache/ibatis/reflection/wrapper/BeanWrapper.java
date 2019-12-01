@@ -17,6 +17,9 @@ package org.apache.ibatis.reflection.wrapper;
 
 import java.util.List;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.reflection.ExceptionUtil;
 import org.apache.ibatis.reflection.MetaClass;
 import org.apache.ibatis.reflection.MetaObject;
@@ -30,6 +33,7 @@ import org.apache.ibatis.reflection.property.PropertyTokenizer;
  * @author Clinton Begin
  */
 public class BeanWrapper extends BaseWrapper {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   private final Object object;
   private final MetaClass metaClass;

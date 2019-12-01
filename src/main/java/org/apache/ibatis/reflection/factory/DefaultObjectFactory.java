@@ -30,6 +30,9 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.reflection.ReflectionException;
 import org.apache.ibatis.reflection.Reflector;
 
@@ -37,6 +40,8 @@ import org.apache.ibatis.reflection.Reflector;
  * @author Clinton Begin
  */
 public class DefaultObjectFactory implements ObjectFactory, Serializable {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   private static final long serialVersionUID = -8855120656740914948L;
 

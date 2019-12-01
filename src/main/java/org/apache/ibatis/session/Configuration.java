@@ -57,6 +57,7 @@ import org.apache.ibatis.executor.resultset.ResultSetHandler;
 import org.apache.ibatis.executor.statement.RoutingStatementHandler;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.io.VFS;
+import org.apache.ibatis.jdbc.AbstractSQL;
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.logging.commons.JakartaCommonsLoggingImpl;
@@ -100,6 +101,8 @@ import org.apache.ibatis.type.TypeHandlerRegistry;
  * 配置类；需要 debug进去看看具体初始化加载了哪些配置；
  */
 public class Configuration {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   protected Environment environment;
 

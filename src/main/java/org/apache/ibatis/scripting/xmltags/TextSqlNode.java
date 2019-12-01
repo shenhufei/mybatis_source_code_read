@@ -17,6 +17,9 @@ package org.apache.ibatis.scripting.xmltags;
 
 import java.util.regex.Pattern;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.parsing.GenericTokenParser;
 import org.apache.ibatis.parsing.TokenHandler;
 import org.apache.ibatis.scripting.ScriptingException;
@@ -26,6 +29,8 @@ import org.apache.ibatis.type.SimpleTypeRegistry;
  * @author Clinton Begin
  */
 public class TextSqlNode implements SqlNode {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
   private final String text;
   private final Pattern injectionFilter;
 

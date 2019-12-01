@@ -22,6 +22,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 
 /**
  * The {@link TypeHandler} for {@link Clob}/{@link Reader} using method supported at JDBC 4.0.
@@ -29,6 +33,7 @@ import java.sql.SQLException;
  * @author Kazuki Shimizu
  */
 public class ClobReaderTypeHandler extends BaseTypeHandler<Reader> {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   /**
    * Set a {@link Reader} into {@link PreparedStatement}.

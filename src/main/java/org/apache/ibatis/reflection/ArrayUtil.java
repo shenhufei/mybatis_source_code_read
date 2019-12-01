@@ -17,10 +17,15 @@ package org.apache.ibatis.reflection;
 
 import java.util.Arrays;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * Provides hashCode, equals and toString methods that can handle array.
  */
 public class ArrayUtil {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   /**
    * Returns a hash code for {@code obj}.

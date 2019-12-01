@@ -21,6 +21,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.YearMonth;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * Type Handler for {@link java.time.YearMonth}.
  * <p>
@@ -32,6 +36,7 @@ import java.time.YearMonth;
  * @author Björn Raupach
  */
 public class YearMonthTypeHandler extends BaseTypeHandler<YearMonth> {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   @Override
   public void setNonNullParameter(PreparedStatement ps, int i, YearMonth yearMonth, JdbcType jt) throws SQLException {

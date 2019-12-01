@@ -21,10 +21,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @author Clinton Begin
  */
 public class SqlTimeTypeHandler extends BaseTypeHandler<Time> {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   @Override
   public void setNonNullParameter(PreparedStatement ps, int i, Time parameter, JdbcType jdbcType)

@@ -15,10 +15,16 @@
  */
 package org.apache.ibatis.scripting.xmltags;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @author Clinton Begin
  */
 public class IfSqlNode implements SqlNode {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
   private final ExpressionEvaluator evaluator;
   private final String test;
   private final SqlNode contents;

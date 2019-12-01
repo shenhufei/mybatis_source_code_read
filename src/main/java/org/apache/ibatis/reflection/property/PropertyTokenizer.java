@@ -17,10 +17,16 @@ package org.apache.ibatis.reflection.property;
 
 import java.util.Iterator;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @author Clinton Begin
  */
 public class PropertyTokenizer implements Iterator<PropertyTokenizer> {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
   private String name;
   private final String indexedName;
   private String index;

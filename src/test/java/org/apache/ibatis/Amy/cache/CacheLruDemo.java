@@ -5,6 +5,9 @@ import java.io.InputStream;
 
 import org.apache.ibatis.Amy.User;
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -22,6 +25,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
  *   @Date 2019年11月18日
  */
 public class CacheLruDemo {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 	public static void main(String[] args) throws IOException {
 	String resource = "org/apache/ibatis/Amy/mybatis-config.xml";//"mybatis-config.xml"
 	InputStream inputStream = Resources.getResourceAsStream(resource);

@@ -16,6 +16,9 @@
 package org.apache.ibatis.scripting.defaults;
 
 import org.apache.ibatis.builder.BuilderException;
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.mapping.SqlSource;
 import org.apache.ibatis.parsing.XNode;
 import org.apache.ibatis.scripting.xmltags.XMLLanguageDriver;
@@ -30,6 +33,7 @@ import org.apache.ibatis.session.Configuration;
  * @author Eduardo Macarron
  */
 public class RawLanguageDriver extends XMLLanguageDriver {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   @Override
   public SqlSource createSqlSource(Configuration configuration, XNode script, Class<?> parameterType) {

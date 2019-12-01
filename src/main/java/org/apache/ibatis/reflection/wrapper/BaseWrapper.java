@@ -18,6 +18,9 @@ package org.apache.ibatis.reflection.wrapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.ReflectionException;
 import org.apache.ibatis.reflection.property.PropertyTokenizer;
@@ -26,6 +29,8 @@ import org.apache.ibatis.reflection.property.PropertyTokenizer;
  * @author Clinton Begin
  */
 public abstract class BaseWrapper implements ObjectWrapper {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   protected static final Object[] NO_ARGUMENTS = new Object[0];
   protected final MetaObject metaObject;

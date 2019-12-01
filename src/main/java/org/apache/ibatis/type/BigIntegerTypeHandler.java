@@ -22,10 +22,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @author Paul Krause
  */
 public class BigIntegerTypeHandler extends BaseTypeHandler<BigInteger> {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   @Override
   public void setNonNullParameter(PreparedStatement ps, int i, BigInteger parameter, JdbcType jdbcType) throws SQLException {

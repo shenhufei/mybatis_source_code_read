@@ -15,10 +15,16 @@
  */
 package org.apache.ibatis.scripting.xmltags;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @author Frank D. Martinez [mnesarco]
  */
 public class VarDeclSqlNode implements SqlNode {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   private final String name;
   private final String expression;

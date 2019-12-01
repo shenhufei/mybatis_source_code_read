@@ -15,10 +15,16 @@
  */
 package org.apache.ibatis.session;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @author Clinton Begin
  */
 public class RowBounds {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   public static final int NO_ROW_OFFSET = 0;
   public static final int NO_ROW_LIMIT = Integer.MAX_VALUE;

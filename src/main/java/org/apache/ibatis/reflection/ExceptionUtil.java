@@ -18,10 +18,16 @@ package org.apache.ibatis.reflection;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.UndeclaredThrowableException;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @author Clinton Begin
  */
 public class ExceptionUtil {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   private ExceptionUtil() {
     // Prevent Instantiation

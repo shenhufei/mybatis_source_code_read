@@ -17,12 +17,17 @@ package org.apache.ibatis.reflection.invoker;
 
 import java.lang.reflect.Field;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.reflection.Reflector;
 
 /**
  * @author Clinton Begin
  */
 public class GetFieldInvoker implements Invoker {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
   private final Field field;
 
   public GetFieldInvoker(Field field) {

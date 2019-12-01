@@ -22,6 +22,9 @@ import ognl.Ognl;
 import ognl.OgnlException;
 
 import org.apache.ibatis.builder.BuilderException;
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 
 /**
  * Caches OGNL parsed expressions.
@@ -31,6 +34,8 @@ import org.apache.ibatis.builder.BuilderException;
  * @see <a href='http://code.google.com/p/mybatis/issues/detail?id=342'>Issue 342</a>
  */
 public final class OgnlCache {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   private static final OgnlMemberAccess MEMBER_ACCESS = new OgnlMemberAccess();
   private static final OgnlClassResolver CLASS_RESOLVER = new OgnlClassResolver();

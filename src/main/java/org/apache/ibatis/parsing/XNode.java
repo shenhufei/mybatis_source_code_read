@@ -20,6 +20,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.w3c.dom.CharacterData;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -30,6 +33,9 @@ import org.w3c.dom.NodeList;
  * @author Clinton Begin
  */
 public class XNode {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
+	
 
   private final Node node;
   private final String name;

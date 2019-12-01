@@ -25,10 +25,16 @@ import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
 import java.util.Arrays;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @author Iwao AVE!
  */
 public class TypeParameterResolver {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   /**
    * @return The field type as {@link Type}. If it has type parameters in the declaration,<br>

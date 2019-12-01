@@ -21,10 +21,15 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @author Clinton Begin
  */
 public class SimpleTypeRegistry {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   private static final Set<Class<?>> SIMPLE_TYPE_SET = new HashSet<>();
 

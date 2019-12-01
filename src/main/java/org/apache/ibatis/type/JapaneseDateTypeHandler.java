@@ -23,6 +23,10 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.chrono.JapaneseDate;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * Type Handler for {@link JapaneseDate}.
  *
@@ -30,6 +34,7 @@ import java.time.chrono.JapaneseDate;
  * @author Kazuki Shimizu
  */
 public class JapaneseDateTypeHandler extends BaseTypeHandler<JapaneseDate> {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   @Override
   public void setNonNullParameter(PreparedStatement ps, int i, JapaneseDate parameter, JdbcType jdbcType)

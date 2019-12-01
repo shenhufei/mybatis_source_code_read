@@ -18,12 +18,16 @@ package org.apache.ibatis.mapping;
 import java.util.Collections;
 import java.util.Map;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.session.Configuration;
 
 /**
  * @author Clinton Begin
  */
 public class Discriminator {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   private ResultMapping resultMapping;
   private Map<String, String> discriminatorMap;

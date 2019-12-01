@@ -20,6 +20,9 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.session.TransactionIsolationLevel;
 import org.apache.ibatis.transaction.Transaction;
 import org.apache.ibatis.transaction.TransactionFactory;
@@ -32,6 +35,7 @@ import org.apache.ibatis.transaction.TransactionFactory;
  * @see ManagedTransaction
  */
 public class ManagedTransactionFactory implements TransactionFactory {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   private boolean closeConnection = true;
 

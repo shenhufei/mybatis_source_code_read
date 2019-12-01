@@ -17,6 +17,9 @@ package org.apache.ibatis.scripting.xmltags;
 
 import ognl.DefaultClassResolver;
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 
 /**
  * Custom ognl {@code ClassResolver} which behaves same like ognl's
@@ -28,6 +31,7 @@ import org.apache.ibatis.io.Resources;
  * @see <a href='https://github.com/mybatis/mybatis-3/issues/161'>Issue 161</a>
  */
 public class OgnlClassResolver extends DefaultClassResolver {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   @Override
   protected Class toClassForName(String className) throws ClassNotFoundException {

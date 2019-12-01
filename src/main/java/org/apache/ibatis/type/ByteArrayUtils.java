@@ -15,10 +15,15 @@
  */
 package org.apache.ibatis.type;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @author Clinton Begin
  */
 class ByteArrayUtils {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   private ByteArrayUtils() {
     // Prevent Instantiation

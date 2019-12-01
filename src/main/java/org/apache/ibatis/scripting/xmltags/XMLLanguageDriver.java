@@ -17,6 +17,9 @@ package org.apache.ibatis.scripting.xmltags;
 
 import org.apache.ibatis.builder.xml.XMLMapperEntityResolver;
 import org.apache.ibatis.executor.parameter.ParameterHandler;
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlSource;
@@ -37,6 +40,8 @@ import org.apache.ibatis.session.Configuration;
  *   @Date 2019年12月1日
  */
 public class XMLLanguageDriver implements LanguageDriver {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   @Override
   public ParameterHandler createParameterHandler(MappedStatement mappedStatement, Object parameterObject, BoundSql boundSql) {

@@ -22,12 +22,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * The {@link TypeHandler} for {@link Blob}/{@link InputStream} using method supported at JDBC 4.0.
  * @since 3.4.0
  * @author Kazuki Shimizu
  */
 public class BlobInputStreamTypeHandler extends BaseTypeHandler<InputStream> {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   /**
    * Set an {@link InputStream} into {@link PreparedStatement}.

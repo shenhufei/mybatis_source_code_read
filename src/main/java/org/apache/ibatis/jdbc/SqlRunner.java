@@ -29,6 +29,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.type.TypeHandler;
 import org.apache.ibatis.type.TypeHandlerRegistry;
 
@@ -36,6 +38,8 @@ import org.apache.ibatis.type.TypeHandlerRegistry;
  * @author Clinton Begin
  */
 public class SqlRunner {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   public static final int NO_GENERATED_KEY = Integer.MIN_VALUE + 1001;
 

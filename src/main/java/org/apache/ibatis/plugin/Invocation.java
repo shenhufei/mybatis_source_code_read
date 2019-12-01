@@ -18,10 +18,16 @@ package org.apache.ibatis.plugin;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @author Clinton Begin
  */
 public class Invocation {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   private final Object target;
   private final Method method;

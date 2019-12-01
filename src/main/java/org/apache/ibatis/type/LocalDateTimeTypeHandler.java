@@ -21,11 +21,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @since 3.4.5
  * @author Tomas Rohovsky
  */
 public class LocalDateTimeTypeHandler extends BaseTypeHandler<LocalDateTime> {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   @Override
   public void setNonNullParameter(PreparedStatement ps, int i, LocalDateTime parameter, JdbcType jdbcType)

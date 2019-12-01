@@ -18,10 +18,16 @@ package org.apache.ibatis.scripting;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @author Frank D. Martinez [mnesarco]
  */
 public class LanguageDriverRegistry {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   private final Map<Class<? extends LanguageDriver>, LanguageDriver> LANGUAGE_DRIVER_MAP = new HashMap<>();
 

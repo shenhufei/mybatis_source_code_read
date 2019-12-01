@@ -16,11 +16,15 @@
 package org.apache.ibatis.type;
 
 import org.apache.ibatis.exceptions.PersistenceException;
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 
 /**
  * @author Clinton Begin
  */
 public class TypeException extends PersistenceException {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   private static final long serialVersionUID = 8614420898975117130L;
 

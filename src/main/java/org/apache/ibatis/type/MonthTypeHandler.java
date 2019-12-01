@@ -21,12 +21,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Month;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  *
  * @since 3.4.5
  * @author Björn Raupach
  */
 public class MonthTypeHandler extends BaseTypeHandler<Month> {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   @Override
   public void setNonNullParameter(PreparedStatement ps, int i, Month month, JdbcType type) throws SQLException {

@@ -16,6 +16,9 @@
 package org.apache.ibatis.scripting.xmltags;
 
 import org.apache.ibatis.builder.SqlSourceBuilder;
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.SqlSource;
 import org.apache.ibatis.session.Configuration;
@@ -24,6 +27,7 @@ import org.apache.ibatis.session.Configuration;
  * @author Clinton Begin
  */
 public class DynamicSqlSource implements SqlSource {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   private final Configuration configuration;
   private final SqlNode rootSqlNode;

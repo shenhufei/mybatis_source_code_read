@@ -15,10 +15,15 @@
  */
 package org.apache.ibatis.jdbc;
 
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @author Clinton Begin
  */
 public class SQL extends AbstractSQL<SQL> {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   @Override
   public SQL getSelf() {

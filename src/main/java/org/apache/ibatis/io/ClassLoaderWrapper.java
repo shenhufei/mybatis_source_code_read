@@ -18,6 +18,8 @@ package org.apache.ibatis.io;
 import java.io.InputStream;
 import java.net.URL;
 
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
+
 /**
  * A class to wrap access to multiple class loaders making them work as one
  *
@@ -30,6 +32,7 @@ import java.net.URL;
  *   @Date 2019年11月23日
  */
 public class ClassLoaderWrapper {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
 
   ClassLoader defaultClassLoader;
   ClassLoader systemClassLoader;

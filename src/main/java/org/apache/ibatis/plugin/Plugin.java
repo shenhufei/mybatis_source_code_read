@@ -24,12 +24,17 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.ibatis.executor.Executor;
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.reflection.ExceptionUtil;
 
 /**
  * @author Clinton Begin
  */
 public class Plugin implements InvocationHandler {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   private final Object target;
   private final Interceptor interceptor;

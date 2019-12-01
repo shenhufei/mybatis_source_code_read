@@ -23,6 +23,7 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 
@@ -38,6 +39,7 @@ import org.apache.ibatis.logging.LogFactory;
  * @author Eduardo Macarron
  */
 public class VendorDatabaseIdProvider implements DatabaseIdProvider {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   private Properties properties;
 

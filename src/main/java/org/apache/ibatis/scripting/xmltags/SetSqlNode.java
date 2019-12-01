@@ -18,12 +18,16 @@ package org.apache.ibatis.scripting.xmltags;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.session.Configuration;
 
 /**
  * @author Clinton Begin
  */
 public class SetSqlNode extends TrimSqlNode {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   private static final List<String> COMMA = Collections.singletonList(",");
 

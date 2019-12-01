@@ -15,6 +15,9 @@
  */
 package org.apache.ibatis.reflection.wrapper;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.ReflectionException;
 
@@ -22,6 +25,7 @@ import org.apache.ibatis.reflection.ReflectionException;
  * @author Clinton Begin
  */
 public class DefaultObjectWrapperFactory implements ObjectWrapperFactory {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   @Override
   public boolean hasWrapperFor(Object object) {

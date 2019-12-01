@@ -21,6 +21,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLXML;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * Convert <code>String</code> to/from <code>SQLXML</code>.
  *
@@ -28,6 +32,7 @@ import java.sql.SQLXML;
  * @author Iwao AVE!
  */
 public class SqlxmlTypeHandler extends BaseTypeHandler<String> {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   @Override
   public void setNonNullParameter(PreparedStatement ps, int i, String parameter, JdbcType jdbcType)

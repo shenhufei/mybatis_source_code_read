@@ -31,6 +31,9 @@ import org.apache.ibatis.cache.decorators.ScheduledCache;
 import org.apache.ibatis.cache.decorators.SerializedCache;
 import org.apache.ibatis.cache.decorators.SynchronizedCache;
 import org.apache.ibatis.cache.impl.PerpetualCache;
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
 
@@ -43,6 +46,8 @@ import org.apache.ibatis.reflection.SystemMetaObject;
  *   @Date 2019年11月19日
  */
 public class CacheBuilder {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
   private final String id;
   private Class<? extends Cache> implementation;
   private final List<Class<? extends Cache>> decorators;

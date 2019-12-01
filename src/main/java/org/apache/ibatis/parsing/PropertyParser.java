@@ -17,11 +17,17 @@ package org.apache.ibatis.parsing;
 
 import java.util.Properties;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @author Clinton Begin
  * @author Kazuki Shimizu
  */
 public class PropertyParser {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   private static final String KEY_PREFIX = "org.apache.ibatis.parsing.PropertyParser.";
   /**

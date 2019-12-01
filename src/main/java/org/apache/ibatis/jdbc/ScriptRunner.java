@@ -27,10 +27,14 @@ import java.sql.Statement;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @author Clinton Begin
  */
 public class ScriptRunner {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
   private static final String LINE_SEPARATOR = System.getProperty("line.separator", "\n");
 

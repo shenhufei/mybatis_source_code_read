@@ -22,11 +22,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.builder.BuilderException;
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 
 /**
  * @author Clinton Begin
  */
 public class ExpressionEvaluator {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   public boolean evaluateBoolean(String expression, Object parameterObject) {
     Object value = OgnlCache.getValue(expression, parameterObject);

@@ -23,7 +23,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 public class ParamNameUtil {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
   public static List<String> getParamNames(Method method) {
     return getParameterNames(method);
   }

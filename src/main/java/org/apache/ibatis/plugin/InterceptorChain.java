@@ -19,10 +19,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.ibatis.jdbc.AbstractSQL;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 /**
  * @author Clinton Begin
  */
 public class InterceptorChain {
+	private static final Log log = LogFactory.getLog(AbstractSQL.class);
+
 
   /**
  *  初始化的时候，已经加载了所有自定义插件对象
