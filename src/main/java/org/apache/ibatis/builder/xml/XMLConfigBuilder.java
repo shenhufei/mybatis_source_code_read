@@ -229,13 +229,26 @@ private void loadCustomVfs(Properties props) throws ClassNotFoundException {
     }
   }
 
-  private void pluginElement(XNode parent) throws Exception {
+  /**
+ *   @Desc 对plugins 的解析
+ *   @author shenhufei
+ *   @Date 2019年12月3日
+ */
+private void pluginElement(XNode parent) throws Exception {
     if (parent != null) {
+    	//因为可以配置多个plugin ，所以这里是可以循环，来解析每一个plugin 对象；
       for (XNode child : parent.getChildren()) {
+    	  //获取  <plugin interceptor="org.apache.ibatis.Amy.plugin.ConfigPlugin"> 标签中的  interceptor 属性的值，也就是获取
+    	  //插件的 相对路径
         String interceptor = child.getStringAttribute("interceptor");
         Properties properties = child.getChildrenAsProperties();
+        // 通过拿到类的的路径，通过反射获取到 Interceptor 接口的实例，也就是 这里说的 plugin 对象；
         Interceptor interceptorInstance = (Interceptor) resolveClass(interceptor).getDeclaredConstructor().newInstance();
+        //这里给Interceptor 对象中的 Properties 字段做赋值，也就是拿到 xml配置文件中的
+        //eg  <property name="someProperty" value="100"/>  配置信息，给property 字段赋值；
         interceptorInstance.setProperties(properties);
+        //将所有的插件对象都存入 InterceptorChain对象中的list集合中；
+        // TODO 为啥不放在 Map集合中；
         configuration.addInterceptor(interceptorInstance);
       }
     }

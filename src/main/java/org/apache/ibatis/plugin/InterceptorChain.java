@@ -26,6 +26,11 @@ import org.apache.ibatis.logging.LogFactory;
 /**
  * @author Clinton Begin
  */
+/** 
+ *   @Desc 封装了所有的  插件对象，并且存储在 list集合中；
+ *   @author shenhufei
+ *   @Date 2019年12月3日
+ */
 public class InterceptorChain {
 	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 

@@ -313,7 +313,8 @@ public List<XNode> evalNodes(String expression) {
   }
 
   /**
-   * 拿到settings标签的中的 name属性已经name属性对应的值先存储起来
+   * 将标签 eg：<property name="someProperty" value="100"/>
+   * 的中的 name属性已经name属性对应的值先存储起来
  * @date 2019年11月21日 
  * @param 
  * @return
