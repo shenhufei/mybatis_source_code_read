@@ -153,6 +153,7 @@ public class DefaultSqlSession implements SqlSession {
       logger.error(ms.toString());
       // 如果有自定义插件 刚好是对executor对象做了处理，那么这边的query 方法的调用，可能就是到代理对象Plugin对象中的方法了。
       return executor.query(ms, wrapCollection(parameter), rowBounds, Executor.NO_RESULT_HANDLER);
+      //有插件针对executor 的时候executor.对象是代理对象，和没有插件针对executor 的时候，这里就是executor原对象
     } catch (Exception e) {
       throw ExceptionFactory.wrapException("Error querying database.  Cause: " + e, e);
     } finally {

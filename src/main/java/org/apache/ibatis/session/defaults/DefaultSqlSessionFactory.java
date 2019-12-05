@@ -114,6 +114,7 @@ private SqlSession openSessionFromDataSource(ExecutorType execType, TransactionI
       //通过 事物工厂类 以及 环境对象 再去创建 事物对象，
       // 这里的是否开启事物是由上层调用的方法来决定的；
       tx = transactionFactory.newTransaction(environment.getDataSource(), level, autoCommit);
+    //在这一步获取 执行器对象，获取获取执行器对象的代理对象；
       final Executor executor = configuration.newExecutor(tx, execType);
       return new DefaultSqlSession(configuration, executor, autoCommit);
     } catch (Exception e) { // 132 4782 3106

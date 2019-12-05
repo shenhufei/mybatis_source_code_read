@@ -55,12 +55,18 @@ public static Object wrap(Object target, Interceptor interceptor) {
 	//获取一个自定义插件对象下，@Signature数组中的数据
     Map<Class<?>, Set<Method>> signatureMap = getSignatureMap(interceptor);
     Class<?> type = target.getClass();
-    //这一步就是获取 被代理对象的所有的接口；这里不做深究
+    //根据目标对象，拿signatureMap对象，判断signatureMap的key是否包含了目标对象实现的接口对象；
+    //并返回，signatureMap中包含的目标对象的接口对象；
     Class<?>[] interfaces = getAllInterfaces(type, signatureMap);
-    if (interfaces.length > 0) {
+  //大于0就说明需要被代理；
+    if (interfaces.length > 0) { 	
+    	//下面就是走的JDK代理；
       return Proxy.newProxyInstance(
+    		  //获取被代理对象的类加载器
           type.getClassLoader(),
+          //传入被代理对象的接口
           interfaces,
+          //Plugin 是InvocationHandler 的一个实例，代理执行任何操作的时候都会去执行InvocationHandler 类的 handler
           new Plugin(target, interceptor, signatureMap));
     }
     //将 @Intercepts({@Signature(type= Executor.class, 注解中其实也就是被切入对象  Executor的代理对象返回
@@ -72,15 +78,26 @@ public static Object wrap(Object target, Interceptor interceptor) {
  *   @author shenhufei
  *   @Date 2019年11月25日
  */
+/**
+ *   @Desc 只要 代理对象执行了任意一个方法，那么就都会走到这里来；然后再根据 InvocationHandler 对象中保存的
+ *  那到 signatureMap中的需要具体做处理的方法名称；看传递过来的方法是否在这个集合中，如果在那么就做去调用
+ *  插件的intercept方法；如果不在那么就走方法的正常流程；
+ *   @author shenhufei
+ *   @Date 2019年12月5日
+ */
 @Override
   public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
     try {
+    	//拿到被拦截方法所在类（也就是被代理的类）的字节码对象，
+    	//被代理的类的字节码对象从signatureMap获取到具体由哪些方法是需要做处理；
       Set<Method> methods = signatureMap.get(method.getDeclaringClass());
-      //有自定义插件，代理走的流程
+      //判断被拦截的方法是否在这个需要被处理的方法集合中。
+      //如果是的：1.就去执行，这个插件对应中的 intercept方法；2.把拦截到的方法执行的参数列表也传递过去（可以有更多的
+     // 功能操作）；
       if (methods != null && methods.contains(method)) {
         return interceptor.intercept(new Invocation(target, method, args));
       }
-      //无自定义插件做代理走的流程
+      //如果不在，那么这里就直接去执行被拦截的类的具体的方法；
       return method.invoke(target, args);
     } catch (Exception e) {
       throw ExceptionUtil.unwrapThrowable(e);
@@ -115,6 +132,7 @@ public static Object wrap(Object target, Interceptor interceptor) {
     while (type != null) {
       for (Class<?> c : type.getInterfaces()) {
         if (signatureMap.containsKey(c)) {
+        	//把包含的对象就放入 interfaces集合中，如果包含，就说明有要做代理，
           interfaces.add(c);
         }
       }

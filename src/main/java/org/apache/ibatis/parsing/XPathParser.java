@@ -244,6 +244,7 @@ public XNode evalNode(Object root, String expression) {
     if (node == null) {
       return null;
     }
+    //把Node节点对象封装在XNode节点对象中；
     return new XNode(this, node, variables);
   }
 

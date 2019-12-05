@@ -23,13 +23,18 @@
   </plugin>
   <plugin interceptor="org.apache.ibatis.Amy.plugin.QueryPlugin">
     <property name="someProperty" value="100"/>
-  </plugin> -->
-  <!-- <plugin interceptor="org.apache.ibatis.Amy.plugin.QueryPluginManyPlace">
+  </plugin>
+  <plugin interceptor="org.apache.ibatis.Amy.plugin.QueryPluginManyPlace">
     <property name="someProperty" value="100"/> -->
     <plugin interceptor="org.apache.ibatis.Amy.plugin.ConfigPlugin">
-    <!--  mybatis的自己的一些需要用的配置字段，相当于spring 的 @Value 注解  -->
+   <!-- mybatis的自己的一些需要用的配置字段，相当于spring 的 @Value 注解   --> 
     <property name="someProperty" value="100"/>
   </plugin>
+  
+  <!-- <plugin interceptor="org.apache.ibatis.Amy.plugin.ResultPlugin">
+   mybatis的自己的一些需要用的配置字段，相当于spring 的 @Value 注解   
+    <property name="someProperty" value="100"/>
+  </plugin> -->
 </plugins>
 
   <environments default="development">

@@ -22,8 +22,14 @@ public class ConfigPlugin implements Interceptor{
 		return properties;
 	}
 
+	/**
+	 *   @Desc InvocationHandler的实例中，的handler方法会调用该方法，
+	 *   @author shenhufei
+	 *   @Date 2019年12月5日
+	 */
 	@Override
 	public Object intercept(Invocation invocation) throws Throwable {
+		
 		log.error("在具体方法之前执行");
 		Object returnObject = invocation.proceed();
 		log.error("在具体方法之后执行");
@@ -51,6 +57,11 @@ public class ConfigPlugin implements Interceptor{
 		this.properties = properties;
 	  }
 	
+	/**
+	 *   @Desc 做代理的植入操作
+	 *   @author shenhufei
+	 *   @Date 2019年12月5日
+	 */
 	public Object plugin(Object target) {
 	    return Plugin.wrap(target, this);
 	  }

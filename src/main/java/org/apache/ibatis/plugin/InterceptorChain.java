@@ -47,6 +47,7 @@ private final List<Interceptor> interceptors = new ArrayList<>();
  *   @Date 2019年11月25日
  */
 public Object pluginAll(Object target) {
+	//遍历所有的插件对象，可能多个插件会针对同一个对象的同一个方法都做了操作
     for (Interceptor interceptor : interceptors) {
       target = interceptor.plugin(target);
     }

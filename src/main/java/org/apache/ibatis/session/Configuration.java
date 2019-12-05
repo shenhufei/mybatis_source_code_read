@@ -657,14 +657,12 @@ public StatementHandler newStatementHandler(Executor executor, MappedStatement m
     } else {
       executor = new SimpleExecutor(this, transaction);
     }
-    if (cacheEnabled) {
-    	
+    if (cacheEnabled) {    	
       executor = new CachingExecutor(executor);
     }
     //1.关于这段代码为啥要执行，只能说是上一步的代码需要构建 SQL执行之前的DefaultSqlSession 对象的，
     // 这段的执行就是为了构建 DefaultSqlSession 对象中的 Executor对象，构建DefaultSqlSession 的时候不用太关心Executor 是代理对象，
-    //还是原生对象；
-    
+    //还是原生对象；  
     //2.当还没有走过下面这段代码的时候，executor 一定是一个原生对象，当走过下段代码的时候executor对象就有可能是代理对象；
     //是否是代理对象，取决于是否自定义了插件对象；
     executor = (Executor) interceptorChain.pluginAll(executor);
