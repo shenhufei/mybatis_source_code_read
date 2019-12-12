@@ -30,9 +30,9 @@ public class ConfigPlugin implements Interceptor{
 	@Override
 	public Object intercept(Invocation invocation) throws Throwable {
 		
-		log.error("在具体方法之前执行");
+		log.error("在具体方法之前执行-----------------");
 		Object returnObject = invocation.proceed();
-		log.error("在具体方法之后执行");
+		log.error("在具体方法之后执行----------------");
 		return returnObject;
 	}
 	
@@ -49,10 +49,8 @@ public class ConfigPlugin implements Interceptor{
 	
 		log.error("properties的数据是："+properties.toString());
 		log.error("properties中url是："+properties.getProperty("url"));
-		properties.setProperty("driver", "com.mysql.jdbc.Driver");
-		properties.setProperty("url", "jdbc:mysql://cdb-ewlmquzk.bj.tencentcdb.com:10191/data_shf");
-		properties.setProperty("username", "root");
-		properties.setProperty("password", "shenhufei_");
+		properties.setProperty("name", "我是谁");
+		
 		log.error("properties中url是："+properties.getProperty("url"));
 		this.properties = properties;
 	  }

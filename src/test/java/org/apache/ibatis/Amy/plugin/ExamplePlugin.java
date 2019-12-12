@@ -20,9 +20,9 @@ public class ExamplePlugin implements Interceptor{
 	private Properties properties = new Properties();
 	@Override
 	public Object intercept(Invocation invocation) throws Throwable {
-		log.error("在具体方法之前执行");
+		log.error("在具体方法之前执行-------------");
 		Object returnObject = invocation.proceed();
-		log.error("在具体方法之后执行");
+		log.error("在具体方法之后执行-----------");
 		return returnObject;
 	}
 	

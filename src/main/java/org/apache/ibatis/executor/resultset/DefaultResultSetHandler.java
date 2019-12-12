@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import org.apache.ibatis.annotations.AutomapConstructor;
 import org.apache.ibatis.binding.MapperMethod.ParamMap;
@@ -58,9 +59,12 @@ import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ResultContext;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.TypeHandler;
 import org.apache.ibatis.type.TypeHandlerRegistry;
+
+import com.alibaba.fastjson.JSONArray;
 
 /**
  * @author Clinton Begin
@@ -69,6 +73,8 @@ import org.apache.ibatis.type.TypeHandlerRegistry;
  * @author Kazuki Shimizu
  */
 public class DefaultResultSetHandler implements ResultSetHandler {
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultSqlSession.class);
+
 
   private static final Object DEFERRED = new Object();
 
@@ -177,10 +183,15 @@ public class DefaultResultSetHandler implements ResultSetHandler {
   //
   // HANDLE RESULT SETS
   //
-  @Override
+  /**
+ *   @Desc 做结果集的赋值操作；
+ *   @author shenhufei
+ *   @Date 2019年12月9日
+ */
+@Override
   public List<Object> handleResultSets(Statement stmt) throws SQLException {
     ErrorContext.instance().activity("handling results").object(mappedStatement.getId());
-
+    logger .error("查询之后，未做回参处理的原始数据是："+stmt.toString());
     final List<Object> multipleResults = new ArrayList<>();
 
     int resultSetCount = 0;

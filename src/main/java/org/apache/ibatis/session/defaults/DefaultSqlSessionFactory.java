@@ -37,7 +37,7 @@ import org.apache.ibatis.transaction.managed.ManagedTransactionFactory;
 /**
  * @author Clinton Begin
  */
-public class DefaultSqlSessionFactory implements SqlSessionFactory {
+public class DefaultSqlSessionFactory implements SqlSessionFactory,Cloneable {
 	private static final Log log = LogFactory.getLog(AbstractSQL.class);
 
 

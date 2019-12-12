@@ -29,9 +29,15 @@ public class StartDemo {
 		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		SqlSession session = sqlSessionFactory.openSession();
 		User user = session.selectOne("org.apache.ibatis.Amy.UserMapper.selectUser",1L);
-		ConfigPlugin config =  new ConfigPlugin();
-		Properties properties = config.getProperties();
-		String  url = (String) properties.get("url");
+//		ConfigPlugin config =  new ConfigPlugin();
+//		Properties properties = config.getProperties();
+//		String  url = (String) properties.get("url");
+//		String  name = (String) properties.get("name");
+//		Integer high = (Integer) properties.get("high");
+//		log.error("url是："+url);
+//		log.error("name是："+name);
+//		log.error("high是："+high);
+		
 //        log.error("plugin中自己设置的参数的值是："+url);
 //		//List<Object> selectList = session.selectList("org.apache.ibatis.Amy.UserMapper.selectAll");
 //		//log.error(selectList.toString());

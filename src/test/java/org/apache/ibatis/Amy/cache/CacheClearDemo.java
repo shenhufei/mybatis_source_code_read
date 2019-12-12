@@ -20,10 +20,10 @@ public class CacheClearDemo {
 		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		SqlSession session = sqlSessionFactory.openSession();
 		
-		User user = session.selectOne("org.apache.ibatis.Amy.UserMapper.selectUser",1L);
+		//User user = session.selectOne("org.apache.ibatis.Amy.UserMapper.selectUser",1L);
 		//更新操作
 		update(session);
-		log.error(user.toString());
+		//log.error(user.toString());
 		System.out.print("");
 	}
 

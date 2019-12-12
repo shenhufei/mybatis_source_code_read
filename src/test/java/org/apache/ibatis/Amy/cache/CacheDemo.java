@@ -25,7 +25,6 @@ public class CacheDemo {
 	InputStream inputStream = Resources.getResourceAsStream(resource);
 	SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 	SqlSession session = sqlSessionFactory.openSession();
-	
 	User user = session.selectOne("org.apache.ibatis.Amy.UserMapper.selectUser",1L);
 	
 	System.out.print(session);
